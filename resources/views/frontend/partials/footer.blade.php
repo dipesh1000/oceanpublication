@@ -1,0 +1,168 @@
+<footer>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 col-lg-3">
+            <div class="footer_box footer_address">
+                <div class = footer_logo>
+                <a href="{{ URL::to('/') }}"><img src="{{ getSiteSetting('logo') ?? '' }}" alt="{{ getSiteSetting('site_Description') ?? '' }}"></a>
+                </div>
+                <div>
+                    {{ getSiteSetting('address') ?? '' }}
+                </div>
+                <div>
+                    {{ getSiteSetting('secondary_phone') ?? '' }}
+                </div>
+                <div>
+                    {{ getSiteSetting('secondary_email') ?? '' }}
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="col-md-3 col-lg-2">
+            <div class="footer_box">
+                <div class="footer_header">
+                    Navigation
+                </div>
+                <div>
+                    <ul class="footer_list">
+                        <li><a href="/about-us">About Us</a></li>
+                        <li><a href="">FAQs Page</a></li>
+                        <li><a href="">Checkout</a></li>
+                        <li><a href="{{ route('getContact') }}">Contact</a></li>
+                        <li><a href="">Blog</a></li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+        <div class="col-md-3 col-lg-2">
+            <div class="footer_box">
+                <div class="footer_header">
+                    Categories
+                </div>
+                <div>
+                    <ul class="footer_list">
+                        <li><a href="">School</a></li>
+                        <li><a href="">College</a></li>
+                        <li><a href="">University</a></li>
+                        <li><a href="">References</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-lg-2" >
+            <div class = "footer_box">
+                <div class="footer_header">
+                    Help & Support
+                </div>
+                <div>
+                    <ul class="footer_list" >
+                        <li> <a href="">Documentation</a></li>
+                        <li><a href="">Live Chart</a></li>
+                        <li><a href="">Mail Us</a><li>
+                        <li><a href="">Privacy</a> </li>
+                        <li><a href="">Faqs</a> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="ccol-md-12 col-lg-3">
+            <div class = "footer_box">
+                <div class="footer_header">
+                    Download Apps
+                </div>
+                <div>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer_copyright">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <strong>&copy; 2020 Ocean Publication</strong>  Developed by <a href="http://an4soft.com">An4soft</a> 
+            </div>
+            <div class="col-md-6">
+                <div class="mobile_links">
+                    <ul >
+                        <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href=""><i class="fab fa-pinterest"></i></i></a></li>
+                        <li><a href=""><i class="fab fa-instagram"></i></a></li>
+                        <li><a href=""><i class="fab fa-linkedin-in"></i></a></li>
+                        <li><a href=""><i class="fab fa-youtube"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<a href="" class="backtop">
+    <i class="fas fa-arrow-up"></i>
+</a>
+</footer>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script> -->
+   
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha512-I5TkutApDjnWuX+smLIPZNhw+LhTd8WrQhdCKsxCFRSvhFx2km8ZfEpNIhF9nq04msHhOkE8BMOBj5QE07yhMA==" crossorigin="anonymous"></script> -->
+     
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+   	<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="{{ asset('assets/js/app.js') }}" defer></script>
+
+    <script>
+         $(".slider-wrapper").slick({
+            infinite: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 3000,
+            cssEase: "ease-out",
+        });
+        
+
+
+//   $('.video-slider').slick({
+//   dots: true,
+//   infinite: false,
+//   speed: 300,
+//   slidesToShow: 4,
+//   slidesToScroll: 4,
+//   responsive: [
+//     {
+//       breakpoint: 1024,
+//       settings: {
+//         slidesToShow: 3,
+//         slidesToScroll: 3,
+//         infinite: true,
+//         dots: true
+//       }
+//     },
+//     {
+//       breakpoint: 600,
+//       settings: {
+//         slidesToShow: 2,
+//         slidesToScroll: 2
+//       }
+//     },
+//     {
+//       breakpoint: 480,
+//       settings: {
+//         slidesToShow: 1,
+//         slidesToScroll: 1
+//       }
+//     }
+//     // You can unslick at a given breakpoint now by adding:
+//     // settings: "unslick"
+//     // instead of a settings object
+//   ]
+// });
+    </script>
+
+  
