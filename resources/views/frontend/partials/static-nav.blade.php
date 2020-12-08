@@ -1,7 +1,7 @@
 <div class="navbar-fixed">
     <div class="primary-navbar container ">
         <div class="logo-container">
-            <img src="{{ getSiteSetting('logo') ?? '' }}" class="img-fluid" alt="{{ getSiteSetting('site_title') ?? '' }}" />
+            <img src="{{ URL::to(getSiteSetting('logo') ?? '') }}" class="img-fluid" alt="{{ getSiteSetting('site_title') ?? '' }}" />
         </div>
         <div class="primary-content">
             <ul class="first-navbar-wrapper">
@@ -36,6 +36,16 @@
                         <li>
                             <a href="{{ route('package') }}">
                                 Packages
+                            </a>
+                        </li>
+                        <li class="fixed-visible">
+                            <a href="{{ route('postType', 'authors') }}">
+                                    Author
+                            </a>
+                        </li>
+                        <li class="fixed-visible">
+                            <a href="{{ route('postType',  'distributors') }}">
+                                Distributor
                             </a>
                         </li>
                         <li>

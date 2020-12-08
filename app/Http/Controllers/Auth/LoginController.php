@@ -59,10 +59,40 @@ class LoginController extends Controller
         }
     }
 
-    public function postLogin(Request $request){
+    public function postLogin(Request $request)
+    {    
+        $request->validate([
+            'email'    => 'required|email',
+            'password' => 'min:6|required'
+        ]);
+            
+        $credentials = array(
+            'email'    => $request->email,
+            'password' => $request->password,
+        );
 
-        Sentinel::authenticate($request->all());
-        return Sentinel::check();
+
+        try {
+            if ($user = Sentinel::authenticate($credentials)) {
+
+                return redirect()->route('userProfile');
+
+            } else {
+                Session::flash('failed', __('Incorrect Email or Password'));
+
+
+                return redirect()->back();
+            }
+        } catch (ThrottlingException $ex) {
+            Session::flash('failed', __('Too many Attempts!!'));
+
+            return redirect()->back();
+
+        } catch (NotActivatedException $ex) {
+            Session::flash('failed', __('User Not Activated'));
+
+            return redirect()->back();
+        }
     }
 
     public function logout(){

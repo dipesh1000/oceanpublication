@@ -19,11 +19,18 @@
                                     <i class="fa fa-phone"></i>
                                     <a href="tel:{{ getSiteSetting('primary_phone') ?? '' }}">{{ getSiteSetting('primary_phone') ?? '' }}</a>
 								
-								</li>
+                                </li>
+                                
 								<li>
                                     <i class="fas fa-envelope"></i>
                                 <a href="mailto:{{ getSiteSetting('primary_email') ?? '' }}">{{ getSiteSetting('primary_email') ?? '' }}</a>
-								</li>
+                                </li>
+                                <li>
+                                    <a href="{{ route('cart') }}" class="btn btn-outline-light btn-sm">
+                                        <i class="fa fa-shopping-cart" aria-hidden="true"></i> 
+                                        Cart <span class="badge badge-pill badge-danger">{{ count((array)session('cart')) }}</span>
+                                    </a>
+                                </li>
 							</ul>
 							<ul class="second-navbar-wrapper">
 								<li>

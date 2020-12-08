@@ -36,4 +36,9 @@ class PosttypeController extends Controller
         }
         return view('frontend.postypes.index', compact('postType', 'posts'));
     }
+    public function getPostTypeDetails($postType, $slug)
+    {
+        $postTypess = $this->cms->getGlobalPostTypeBySlug($slug);
+        dd($postTypess);  
+    }
 }

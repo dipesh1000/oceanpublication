@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5",
+        "bumbummen99/shoppingcart": "^3.0",
         "cartalyst/sentinel": "^4.0",
         "cviebrock/eloquent-sluggable": "^7.0",
         "davejamesmiller/laravel-breadcrumbs": "5.x",

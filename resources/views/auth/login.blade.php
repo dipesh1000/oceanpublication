@@ -21,11 +21,11 @@
                         </div>
                         <form action="{{ route('post.login') }}" method="POST">
                             {{ csrf_field() }}
+                            @include('auth.flash')
                             <div class="form-group">
-                               <label for="">User Name</label>
-                               <input type="text" name="email" class="form-control" placeholder="Username">
-
-                            </div>
+                            <label for="">User Name</label>
+                            <input type="text" value="{{ old('email') }}" name="email" class="form-control" placeholder="Username">
+                            <small class="text-danger alert-message">{{ $errors->first('email') }}</small>
                             <div class="form-group">
                                <label for="">Password</label>
                                <input type="password" name="password" class="form-control" placeholder="*********">

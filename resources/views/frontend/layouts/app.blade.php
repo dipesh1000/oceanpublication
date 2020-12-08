@@ -24,5 +24,7 @@
     <!-- footer and scripts src here  -->
     @include('frontend.partials.footer')
 
+    {{-- for custom scripts --}}
+    @yield('scripts')
 </body>
 </html>

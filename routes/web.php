@@ -47,6 +47,7 @@ Route::group(
 
     //Authors
     Route::get('postType/{post_type}', 'PosttypeController@getPostType')->name('postType');
+    Route::get('postType/{post_type}/{slug}', 'PosttypeController@getPostTypeDetails')->name('postTypeDetails');
 
     //searchable
     Route::get('search', 'FrontpageController@getSearch')->name('search');
@@ -54,6 +55,9 @@ Route::group(
     //Contact Page
     Route::get('contact', 'ContactController@getContactPage')->name('getContact');
     Route::Post('contact', 'ContactController@storeContact')->name('storeContact');
+    Route::get('/add-cart/{id}', 'CartController@addToCart')->name('addToCart');
+    Route::get('/cart', 'CartController@index')->name('cart');
+    Route::delete('remove-from-cart', 'ProductsController@remove');
 });
 
 Route::group([

@@ -11,8 +11,11 @@
                             <div class="card">
                                 <div class="ditributer-image" style="background-image: url('{{ $post->image ?? asset('assets/img/user.png')}}')"></div>
                                 <div class="card-body">
-                                    <h5 class="card-title">{{$post->title}}</h5>
+                                <a href="{{ route('postTypeDetails', [$postType->slug, $post->slug]) }}">
+                                        <h5 class="card-title">{{$post->title}}</h5>
+                                    </a>
                                 </div>
+                                
                                 <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                     Subject
                                 </button>
@@ -32,7 +35,6 @@
                         <div class="col-md-3">
                             <div class="card">
                                 <div class="ditributer-image" style="background-image: url('{{ $item->postMetas[3]->value ?? ''}}')"></div>
-                                {{-- <img class="card-img-top img-thumbnail" src="{{ $item->postMetas[3]->value ?? ''}}" alt="Card image cap"> --}}
                                 <div class="card-body">
                                     <h5 class="card-title">{{$item->title}}</h5>
                                 </div>

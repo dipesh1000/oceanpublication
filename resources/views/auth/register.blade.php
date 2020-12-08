@@ -29,18 +29,26 @@
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <input type="text" name="first_name" class="form-control" placeholder="First Name">
-                             </div>
+                                <small class="text-danger alert-message">{{ $errors->first('first_name') }}</small>
+                            </div>
                              <div class="form-group">
                                 <input type="text" name="last_name" class="form-control" placeholder="Last Name">
+                                <small class="text-danger alert-message">{{ $errors->first('last_name') }}</small>
                              </div>
                              <div class="form-group">
                                 <input type="email" name="email" class="form-control" placeholder="Email">
+                                <small class="text-danger alert-message">{{ $errors->first('email') }}</small>
+                             </div>
+                             <div class="form-group">
+                                <input type="text" name="phone" class="form-control" placeholder="Phone">
+                                <small class="text-danger alert-message">{{ $errors->first('phone') }}</small>
                              </div>
                             {{-- <div class="form-group">
                                <input type="text" class="form-control" placeholder="Username">
                             </div> --}}
                             <div class="form-group">
                                <input type="password" name="password" class="form-control" placeholder="*********">
+                               <small class="text-danger alert-message">{{ $errors->first('password') }}</small>
                             </div>
                             <div class="form-group">
                                 <input type="password" name="password" class="form-control" placeholder="*********">

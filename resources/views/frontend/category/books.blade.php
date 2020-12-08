@@ -16,8 +16,8 @@
                     <div class="new-price">Rs. {{ $result->offer_price }} </div>
                 </div>
                 <div class="book_button">    
-                <a class="btn_addcart" href="{{ route('book.single', $result->slug) }}"> <i class="fas fa-eye"></i> View</a>
-                    <!-- <a class="btn_like" href=""> <i class="far fa-heart"></i> </a> -->
+                <a class="btn_addcart" href="{{ route('addToCart', $result->id) }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    Add To Cart</a>
                 </div>
             </div>
         </div>
