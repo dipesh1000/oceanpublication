@@ -50,6 +50,13 @@
                                     @endif
                                 </div>
                                 <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <input type="text" class="form-control" value="{{ $users->address ?? ''}}" name="address" id="address" placeholder="Enter Address">
+                                    @if ($errors->has('address'))
+                                        <span class="text-danger">{{ $errors->first('address') }}</span>
+                                    @endif
+                                </div>
+                                <div class="form-group">
                                     <label for="file">Image</label>
                                     <img src="{{ $users->image ?? ''}}" class="rounded mx-auto d-block" width="100px" alt="...">
                                     <input type="file" class="form-control" name="image" id="file" placeholder="Enter phone">

@@ -7,6 +7,9 @@ use App\Model\GobalPost;
 use App\Model\GobalPostMeta;
 use App\Model\Category;
 use App\Model\SiteSetting;
+use App\Repositories\RepoCourse\CourseInterface;
+use App\Repositories\RepoCourse\CourseRepository;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 
 function getSiteSetting( $key ) {
     $config = SiteSetting::where( 'key', '=', $key )->first();
@@ -227,6 +230,53 @@ function gobalPostImage($id, $type=null, $imgclass=null, $imgid=null){
         return null;
     }
     return null;
+};
+
+function getCoursesByType($cart) 
+{
+    $interface = new CourseRepository();
+    if($cart->name == "book"){
+        $book = $interface->getBookById($cart->id);
+        return $book;
+    }
+
+    if($cart->name == "video"){
+        $video = $interface->getVideoById($cart->id);
+        return $video;
+
+    }
+
+    if($cart->name == "package"){
+        $package = $interface->getPackageById($cart->id);
+        return $package;
+
+    }
+        
+}
+function getSavedCourseByType($request) 
+{
+    $interface = new CourseRepository();
+    if($request['name'] == "book"){
+        $book = $interface->getBookById($request['courseId']);
+        return $book;
+    }
+
+    if($request['name'] == "video"){
+        $video = $interface->getVideoById($request['courseId']);
+        return $video;
+    }
+
+    if($request['name'] == "package"){
+        $package = $interface->getPackageById($request['courseId']);
+        return $package;
+
+    }
+        
+}
+function getProfileDetails($key)
+{
+    $users = Sentinel::getUser();
+    return $users->$key;
 }
 
 

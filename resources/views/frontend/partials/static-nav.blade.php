@@ -1,7 +1,9 @@
 <div class="navbar-fixed">
     <div class="primary-navbar container ">
         <div class="logo-container">
-            <img src="{{ URL::to(getSiteSetting('logo') ?? '') }}" class="img-fluid" alt="{{ getSiteSetting('site_title') ?? '' }}" />
+            <a href="{{ URL::to('/') }}">
+                <img src="{{ URL::to(getSiteSetting('logo') ?? '') }}" class="img-fluid" alt="{{ getSiteSetting('site_title') ?? '' }}" />
+            </a>
         </div>
         <div class="primary-content">
             <ul class="first-navbar-wrapper">
@@ -62,6 +64,9 @@
                             <a href="" data-toggle="modal" data-target="#signin">
                                 Login
                             </a>
+                        </li>
+                        <li>
+                           @include('frontend.cart.mini-cart')
                         </li>
                     </ul>
         </div>

@@ -6,7 +6,6 @@
             <div class="our_package_header">
                 Our Packages
             </div>
-            
             <div class="row">
                 @foreach ($packages as $package)
                     <div class="col-md-3">

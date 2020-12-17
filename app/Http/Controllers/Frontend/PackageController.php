@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Package;
 use App\Model\Book;
+use App\Model\PackageItem;
 
 class PackageController extends Controller
 {
@@ -19,12 +20,8 @@ class PackageController extends Controller
     }
     public function singlePackage($slug)
     {
-        $pack = Package::where('slug', $slug)->first();
-        $packitem = $pack->packageItem;
-        $books=[];
-        foreach ($packitem as $item) {
-            $books[] = $item->itemable;
-        }  
-        return view('frontend.packages.single', compact('pack', 'books'));
+        $package = Package::where('slug', $slug)->first();
+        return view('frontend.packages.single', compact('package'));
+        // return $packitem;
     }
 }

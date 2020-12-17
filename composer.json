@@ -21,8 +21,10 @@
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "laravelcollective/html": "^6.2",
+        "realrashid/sweet-alert": "^3.2",
         "spatie/laravel-activitylog": "^3.16",
-        "spatie/laravel-analytics": "^3.10"
+        "spatie/laravel-analytics": "^3.10",
+        "uxweb/sweet-alert": "^2.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

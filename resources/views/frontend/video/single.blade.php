@@ -2,6 +2,7 @@
 @section('content')
 {{-- {{ dd($pack) }} --}}
 <div id="single_page">
+
     <!-- <div class="banner_container">
         <div class="text_container">
             <div>
@@ -57,19 +58,19 @@
     <div class="course_container">
 
     <div class="container">
-        {{-- <div class="row">
+        <div class="row">
 
             <div class="col-md-8">
                 <div class="course_content_container">
                     <div class="course_content_header">
-                        Course Content
+                        Table Of Content
                     </div>
                     <div class="course_module_container">
 
                         <div class="module_header">
-                            Module 1: Introduction
+                            {!! $video->table_of_content !!}
                         </div>
-                        <div class="module_list">
+                        {{-- <div class="module_list">
                             <div>
                                 <a href="">
                                     <div>
@@ -140,159 +141,7 @@
                                     </div>
                                 </a>
                             </div>
-                        </div>
-                       
-                        <div class="module_header">
-                            Module 1: Introduction
-                        </div>
-                        <div class="module_list">
-                            <div>
-                                <a href="">
-                                    <div>
-                                        <i class="fas fa-video"></i>Introduction
-                                    </div>
-                                    <div>
-                                        4m    
-                                    </div>
-                                </a>
-                            </div>
-                            <div>
-                                <a href="">
-                                    <div>
-                                        <i class="fas fa-video"></i>Intro to chapter 1
-                                    </div>
-                                    <div>
-                                        4m    
-                                    </div>
-                                </a>
-                            </div>
-                            <div>
-                                <a href="">
-                                    <div>
-                                        <i class="fas fa-video"></i>Intro to chapter 1
-                                    </div>
-                                    <div>
-                                        4m    
-                                    </div>
-                                </a>
-                            </div>
-                            <div>
-                                <a href="">
-                                    <div>
-                                        <i class="fas fa-video"></i>Intro to chapter 1
-                                    </div>
-                                    <div>
-                                        4m    
-                                    </div>
-                                </a>
-                            </div>
-                            <div>
-                                <a href="">
-                                    <div>
-                                        <i class="fas fa-video"></i>Intro to chapter 1
-                                    </div>
-                                    <div>
-                                        4m    
-                                    </div>
-                                </a>
-                            </div>
-                            <div>
-                                <a href="">
-                                    <div>
-                                        <i class="fas fa-video"></i>Intro to chapter 1
-                                    </div>
-                                    <div>
-                                        4m    
-                                    </div>
-                                </a>
-                            </div>
-                            <div>
-                                <a href="">
-                                    <div>
-                                        <i class="fas fa-video"></i>Intro to chapter 1
-                                    </div>
-                                    <div>
-                                        4m    
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="module_header">
-                            Module 1: Introduction
-                        </div>
-                        <div class="module_list">
-                            <div>
-                                <a href="">
-                                    <div>
-                                        <i class="fas fa-video"></i>Introduction
-                                    </div>
-                                    <div>
-                                        4m    
-                                    </div>
-                                </a>
-                            </div>
-                            <div>
-                                <a href="">
-                                    <div>
-                                        <i class="fas fa-video"></i>Intro to chapter 1
-                                    </div>
-                                    <div>
-                                        4m    
-                                    </div>
-                                </a>
-                            </div>
-                            <div>
-                                <a href="">
-                                    <div>
-                                        <i class="fas fa-video"></i>Intro to chapter 1
-                                    </div>
-                                    <div>
-                                        4m    
-                                    </div>
-                                </a>
-                            </div>
-                            <div>
-                                <a href="">
-                                    <div>
-                                        <i class="fas fa-video"></i>Intro to chapter 1
-                                    </div>
-                                    <div>
-                                        4m    
-                                    </div>
-                                </a>
-                            </div>
-                            <div>
-                                <a href="">
-                                    <div>
-                                        <i class="fas fa-video"></i>Intro to chapter 1
-                                    </div>
-                                    <div>
-                                        4m    
-                                    </div>
-                                </a>
-                            </div>
-                            <div>
-                                <a href="">
-                                    <div>
-                                        <i class="fas fa-video"></i>Intro to chapter 1
-                                    </div>
-                                    <div>
-                                        4m    
-                                    </div>
-                                </a>
-                            </div>
-                            <div>
-                                <a href="">
-                                    <div>
-                                        <i class="fas fa-video"></i>Intro to chapter 1
-                                    </div>
-                                    <div>
-                                        4m    
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
+                        </div> --}}
 
                     </div>
                 </div>
@@ -303,61 +152,8 @@
                     </div>
                     <div class="course_module_container">
                         <div class="course_description_container">
-                            <div>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                 Reiciendis iure maiores porro aperiam at maxime atque error 
-                                aliquid provident perspiciatis ipsum quidem sed eos, qui vel nulla velit architecto dolorum. 
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis eveniet impedit, nihil dolore similique qui 
-                                consectetur illo tempora ducimus delectus itaque! 
-                                Placeat delectus soluta eveniet voluptatem ipsum corrupti nesciunt voluptatibus!
-                            </div>
-                                <br>
-                            <div>
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora laudantium rem expedita dolorum id 
-                                voluptatibus dolorem, ipsa velit, optio quasi libero quae sequi corrupti quas aliquam porro ullam, ea facilis.
-                            </div>
-                        </div>
-
-                            <br>
-                        
-                            <div class="course_description_container">
-                                <div class="description_question">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit?
-                                </div>
-                                <div>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates autem quo voluptatum
-                                     eum, earum iusto cum. Earum cum laborum qui quisquam, quis veritatis. Necessitatibus dicta 
-                                     sed, corrupti labore ex laborum.
-                                </div>
-                                <br>
-                                <div>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates autem quo voluptatum
-                                     eum, earum iusto cum. Earum cum laborum qui quisquam, quis veritatis. Necessitatibus dicta 
-                                     sed, corrupti labore ex laborum.
-                                </div>
-
-                            </div>
-                            <br>
-                        
-                            <div class="course_description_container">
-                                <div class="description_question">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit?
-                                </div>
-                                <div>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates autem quo voluptatum
-                                     eum, earum iusto cum. Earum cum laborum qui quisquam, quis veritatis. Necessitatibus dicta 
-                                     sed, corrupti labore ex laborum.
-                                </div>
-                                <br>
-                                <div>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates autem quo voluptatum
-                                     eum, earum iusto cum. Earum cum laborum qui quisquam, quis veritatis. Necessitatibus dicta 
-                                     sed, corrupti labore ex laborum.
-                                </div>
-
-                            </div>
-                            
-                      
+                        <div>{!! $video->description !!}</div>
+                        </div>                      
                     </div>
 
                 </div>
@@ -399,9 +195,10 @@
                                 </ul>
                             </div>
                             <div class="enroll_btn">
-                                <a href="">
-                                    Enroll Now <i class="fas fa-angle-right"></i>
-                                </a>
+                                <a href="javascript:void(0)" class="addtocart" data-course="{{$video->id}}">
+                                    Add To Cart <i class="fas fa-angle-right"></i>
+                                    <a href="javascript:void(0)" class="cart-remove-from-cart-button save-course-later" course-id="{{ $video->id }}">
+                                        Save For Later<i class="fas fa-angle-right"></i>
                             </div>
                            
                         </div>
@@ -413,7 +210,7 @@
                     <a href="">
                         <div class="course_module_side_container">
                             <div class="side_container_logo">
-                                <img src="img/logo.png" alt="…"> Ocean Publication
+                                <img src="{{ getSiteSetting('logo') ?? '' }}" alt="…"> Ocean Publication
                             </div>
                             
                         </div>
@@ -423,7 +220,7 @@
 
             </div>
 
-        </div> --}}
+        </div>
         @if(count($similarVideos) > 0)
         <div class="similar_content_header">
             Similar Content
@@ -472,3 +269,127 @@
   </div>
 
 @endsection
+@push('scripts')
+<script type="text/javascript">
+        function UpdateMiniCart() {
+            $.ajax({
+                type: "GET",
+                url: "{{ route('cart.mini')  }}",
+                beforeSend: function (data) {
+                    //
+                },
+                success: function (data) {
+                    $('#mini-cart').html(data);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //
+                },
+                complete: function () {
+                    //
+                }
+            });
+            }
+        function sweetAlert(type, title, message) {
+            swal({
+                title: title,
+                html: message,
+                type: type,
+                confirmButtonColor: '#ee3d43',
+                timer: 20000
+            }).catch(swal.noop);
+        }
+        $(document).on("click", ".addtocart", function (e) {
+            // alert('here');
+            e.preventDefault();
+            var $this = $(this);
+            var course = $this.attr('data-course');
+            var type = 'video';
+            quantity = 1;
+             
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: 'POST',
+                postType: 'html',
+                url: "{{ route('addToCart') }}",
+                data: {
+                    course: course,
+                    type: type,
+                    quantity: quantity
+                },
+                beforeSend: function (data) {
+                    $this.button('loading')
+                },
+                success: function(data){
+                    console.log(data);
+                    if (data.status) {
+                    $('.alert-message.alert-danger').fadeOut();
+
+                    var message = '<div><span><strong><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>Success!</strong> ';
+                    message += data.message;
+                    message += '</span><a href="{{ route('cart') }}" class="btn btn-xs btn-primary pull-right">View cart</a></div>';
+
+                    $('.alert-message.alert-success').html(message).fadeIn().delay(3000).fadeOut('slow');
+
+                    sweetAlert('success', 'Success', data.message + '<a href="{{ route('cart') }}"> View Cart</a>');
+                }
+
+                UpdateMiniCart();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    sweetAlert('error', 'Oops...', 'Something went wrong!');
+                },
+                complete: function () {
+                    $this.button('reset');
+                    //$("html, body").animate({scrollTop: 0}, "slow");
+                }
+            });
+        });
+
+        //save for later
+        $(document).on("click", ".save-course-later", function (e) {
+            e.preventDefault();
+            var $this = $(this);
+            var courseId = $this.attr('course-id');
+            var name = 'video';
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: "{{ route('saveCourseLater.store')  }}",
+                data: {
+                  courseId: courseId,
+                  name: name
+                },
+                // beforeSend: function () {
+                //     $this.prop('disabled', true);
+                // },
+                success: function (data) {
+                    if (data.status == 'login') {
+                    window.location.replace('{{ route('login') }}');
+                  }
+                  if (data.status == 'exists'){
+                    swal(data.status, data.message, "error");
+                  }
+                  else{
+                    swal(data.status, data.message, "success");
+                  }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(thrownError);
+                },
+                complete: function () {
+                    // location.reload();
+                }
+            });
+
+        });    
+    
+</script>
+@endpush

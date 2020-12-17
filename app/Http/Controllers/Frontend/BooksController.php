@@ -19,6 +19,7 @@ class BooksController extends Controller
     public function getBooksBySlug($slug)
     {
         $book = Book::where('slug', $slug)->first();
+        $book->type = 'book';
         $similarBooks = Book::orderBy('ID','DESC')
             ->where('category_id', $book->category_id)
             ->where('id', '!=' , $book->id)

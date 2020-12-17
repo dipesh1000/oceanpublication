@@ -165,7 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        UxWeb\SweetAlert\SweetAlertServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -234,6 +234,7 @@ return [
         'Reminder'   => Cartalyst\Sentinel\Laravel\Facades\Reminder::class,
         'Sentinel'   => Cartalyst\Sentinel\Laravel\Facades\Sentinel::class,
         'Image' => 'Intervention\Image\Facades\Image',
+        'Alert' => UxWeb\SweetAlert\SweetAlert::class,
 
     ],
 

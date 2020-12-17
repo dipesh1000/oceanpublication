@@ -56,4 +56,12 @@ class Video extends Model
     public function packageItem(){
         return $this->morphMany(PackageItem::class, 'itemable');
     }
+    public function orderItem()
+    {
+        return $this->morphMany(Order::class, 'orderable');
+    }
+    public function savedItem()
+    {
+        return $this->morphMany(SavedCourse::class, 'saveable');
+    }
 }

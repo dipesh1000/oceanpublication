@@ -5,7 +5,9 @@
 				<div class="navbar-wrapper">
 					<div class="primary-navbar container ">
 						<div class="logo-container">
-							<img src="{{ getSiteSetting('logo') ?? '' }}" class="img-fluid" alt="" />
+                            <a href="{{ URL::to('/') }}">
+                                <img src="{{ getSiteSetting('logo') ?? '' }}" class="img-fluid" alt="" />
+                            </a>
 						</div>
 						<div class="primary-content">
 							<ul class="first-navbar-wrapper">
@@ -26,10 +28,7 @@
                                 <a href="mailto:{{ getSiteSetting('primary_email') ?? '' }}">{{ getSiteSetting('primary_email') ?? '' }}</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('cart') }}" class="btn btn-outline-light btn-sm">
-                                        <i class="fa fa-shopping-cart" aria-hidden="true"></i> 
-                                        Cart <span class="badge badge-pill badge-danger">{{ count((array)session('cart')) }}</span>
-                                    </a>
+                                    @include('frontend.cart.mini-cart')
                                 </li>
 							</ul>
 							<ul class="second-navbar-wrapper">

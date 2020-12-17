@@ -6,23 +6,23 @@ use App\Model\Book;
 use App\Model\Package;
 use App\Model\Video;
 
-class CourseRepository implements CourseRepository 
+class CourseRepository implements CourseInterface 
 {
-    public function getBookBySlug($slug)
+    public function getBookById($id)
     {
-        $book = Book::where('slug', $slug)->first();
+        $book = Book::where('id', $id)->first();
         $book->type = 'book';
         return $book;
     }
-    public function getVideoBySlug($slug)
+    public function getVideoById($id)
     {
-        $video = Video::where('slug', $slug)->first();
+        $video = Video::where('id', $id)->first();
         $video->type = 'video';
         return $video;
     }
-    public function getPackageBySlug($slug)
+    public function getPackageById($id)
     {
-        $package = Package::where('slug', $slug);
+        $package = Package::where('id', $id)->first();
         $package->type = 'package';
         return $package;
     }

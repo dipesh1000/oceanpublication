@@ -4,7 +4,7 @@
     <div class="col-md-3 col-6">
         <div class="book_list">
             <div class="book_img">
-            <a href=""><img class="img-fluid" src="{{ $result->image }}" alt="{{ $result->title }}"></a>
+            <a href="{{ route('book.single', $result->slug) }}"><img class="img-fluid" src="{{ $result->image }}" alt="{{ $result->title }}"></a>
                     
             </div>
             <div class="book_description">
@@ -16,7 +16,7 @@
                     <div class="new-price">Rs. {{ $result->offer_price }} </div>
                 </div>
                 <div class="book_button">    
-                <a class="btn_addcart" href="{{ route('addToCart', $result->id) }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <a class="btn_addcart" href=""><i class="fa fa-shopping-cart" aria-hidden="true"></i>
                     Add To Cart</a>
                 </div>
             </div>
@@ -28,7 +28,7 @@
 <div class="col-md-3 col-6">
     <div class="book_list">
         <div class="book_img">
-        <a href=""><img class="img-fluid" src="{{ $result->image }}" alt="{{ $result->title }}"></a>
+        <a href="{{ route('video.single', $result->slug) }}"><img class="img-fluid" src="{{ $result->image }}" alt="{{ $result->title }}"></a>
                 
         </div>
         <div class="book_description">

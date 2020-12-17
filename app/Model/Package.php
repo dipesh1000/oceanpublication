@@ -4,6 +4,7 @@ namespace App\Model;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -45,5 +46,13 @@ class Package extends Model
 
     public function packageItem(){
         return $this->hasMany(PackageItem::class, 'package_id');
+    }
+    public function orderItem()
+    {
+        return $this->morphMany(Order::class, 'orderable');
+    }
+    public function savedItem()
+    {
+        return $this->morphMany(SavedCourse::class, 'saveable');
     }
 }

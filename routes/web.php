@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -55,23 +56,31 @@ Route::group(
     //Contact Page
     Route::get('contact', 'ContactController@getContactPage')->name('getContact');
     Route::Post('contact', 'ContactController@storeContact')->name('storeContact');
-    Route::get('/add-cart/{id}', 'CartController@addToCart')->name('addToCart');
+
+    //cart
     Route::get('/cart', 'CartController@index')->name('cart');
-    Route::delete('remove-from-cart', 'ProductsController@remove');
+    Route::post('/cart', 'CartController@addToCart')->name('addToCart');
+    Route::get( '/mini-cart', 'CartController@getMiniCart' )->name( 'cart.mini' );
+    Route::delete('/remove-from-cart', 'CartController@remove');
 });
+Route::post('/save-course-later', 'UserDashboard\SavedCourseController@savedCourse')->name('saveCourseLater.store');
 
 Route::group([
     'namespace' => 'UserDashboard',
+    'middleware' => 'sentinel'
 ],function() {
     Route::get('/userdashboard', 'DashboardController@index')->name('userDashboard');
-    Route::get('/profile', 'DashboardController@singleProfile')->name('userProfile');
-    Route::patch('/profile/{id}', 'DashboardController@updateProfile')->name('updateProfile');
+    Route::get('/profile', 'ProfileController@userProfile')->name('userProfile');
+    Route::get('/profile/edit/{id}', 'ProfileController@userProfileEdit')->name('userProfileEdit');
+    Route::patch('/profile/edit/{id}', 'ProfileController@updateProfile')->name('updateProfile');
+    Route::post('/checkout', 'OrderController@store')->name('checkout.store');
+    //save course for later
+    Route::get('/save-course-later', 'SavedCourseController@getSavedCourse')->name('saveCourseLater');
+    Route::get('/courses', 'CourseController@getAllCourses')->name('purchasedCourse');
 });
-
 Route::group(
     [
         'namespace' =>'Auth',
-
     ],function () {
 
     Route::get('/register', 'RegistrationController@register')->name('register');

@@ -19,53 +19,53 @@
               </ul>
             </div>
           </div>
-
         <div class="course_container">
           <div class="row">
             <div class="col-lg-12">
               <div class="savedcourses-content">
                 @php
-                    $total = 0
+                    $total = 0;
                 @endphp
-                @if (session('cart'))
+                @if (Cart::instance('default')->count())
                 <div class="row">
                     <div
                       class="col-lg-9 order-lg-1 order-md-12 order-sm-12 order-2"
                     >
-                    @foreach (session('cart') as $id => $details)
+                    @foreach ($courses as $cartContent)
                     @php
-                        $total += $details['offer_price'] * $details['quantity']
+                        $total += $cartContent->offer_price
                     @endphp
                     <div class="saved-courses-list">
                       <div class="row">
                         <div class="col-lg-2">
                           <div class="course-image">
-                          <img src="{{ $details['image'] }}" />
+                          <img src="{{ $cartContent->image }}" />
                           </div>
                         </div>
                         <div class="col-lg-6">
                           <div class="course-details">
                             <div class="course-title">
-                            <strong>{{ $details['title'] }}</strong>
+                            <strong>{{ $cartContent->title }}</strong>
                             </div>
-                            <div class="course-subtitle">
+                            {{-- <div class="course-subtitle">
                                 {{ $details['description'] }}
-                            </div>
+                            </div> --}}
                           </div>
                         </div>
                         <div class="col-lg-2">
                           <div class="course-add-remove">
                             {{-- <button class="add-to-cart-button">Add</button> --}}
-                           
-                          <button class="remove-from-cart-button remove-from-cart" data-id="{{ $id }}">
-                              Remove
-                            </button>
+
+                          <button class="remove-from-cart-button remove-from-cart" data-id="{{ $cartContent->cartId }}">
+                            Remove
+                          </button>
+
                           </div>
                         </div>
                         <div class="col-lg-2">
                           <div class="course-price">
-                            <strong>Rs. {{ $details['offer_price'] }}</strong>
-                            <s>Rs. {{ $details['price'] }}</s>
+                            <strong>Rs.{{ $cartContent->offer_price }}</strong>
+                            <s>Rs. {{ $cartContent->price }}</s> 
                           </div>
                         </div>
                       </div>
@@ -78,7 +78,7 @@
                       <div class="total-checkout-price-section">
                         Total
                         <p class="total-price">Rs.{{ $total }} /-</p>
-                        <button class="checkout-button">Checkout</button>
+                        <button class="checkout-button checkout" data-total="{{ $total }}">Checkout</button>
                       </div>
                     </div>
                   </div>
@@ -103,11 +103,47 @@
                 method: 'DELETE',
                 data: {_token: '{{ csrf_token() }}', id: ele.attr('data-id')},
                 success: function(response) {
+                    console.log(response)
                     window.location.reload();
                 }
             })
         }
     })
+    // Order Store Request
+    $(document).on("click", ".checkout", function (e) {
+            e.preventDefault();
+            var $this = $(this);
+            var price = $this.attr('data-total');
+            // alert($price);
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "{{ route('checkout.store')  }}",
+                data: {
+                    price: price
+                },
+                beforeSend: function () {
+                    $this.prop('disabled', true);
+                },
+                success: function (data) {
+                  if (data.status) {
+                    swal(data.status, data.message, "success");
+                  }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(thrownError);
+                },
+                complete: function () {
+                    // location.reload();
+                }
+            });
+
+        });
   </script>
 @endsection
 

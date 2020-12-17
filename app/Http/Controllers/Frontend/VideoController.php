@@ -19,6 +19,7 @@ class VideoController extends Controller
     public function getVideoBySlug($slug)
     {
         $video = Video::where('slug', $slug)->first();
+        $video->type = 'video';
         $similarVideos = Video::orderBy('ID','DESC')
             ->where('category_id', $video->category_id)
             ->where('id', '!=' , $video->id)

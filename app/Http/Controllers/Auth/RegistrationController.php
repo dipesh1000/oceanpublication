@@ -23,15 +23,15 @@ class RegistrationController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'min:6|required'
         ]);
-        $data = Sentinel::register($request->all());
+        $data = Sentinel::registerAndActivate($request->all());
         
-        $activation = Activation::create($data);
-        $data->activation = $activation->code;
+        // $activation = Activation::create($data);
+        // $data->activation = $activation->code;
         // Mail::to('aalok@mail.com')->send(new RegisterUserMail($data));
 
-            $data = ['mail'=> 'test@mail.com', 'name'=> 'Jhon'];
+            // $data = ['mail'=> 'test@mail.com', 'name'=> 'Jhon'];
 
-        dispatch(new SendConfirmedEmail($data))->delay(Carbon::now()->addSeconds(5));
-        return $data; 
+        // dispatch(new SendConfirmedEmail($data))->delay(Carbon::now()->addSeconds(5));
+        return redirect()->route('login'); 
     }
 }

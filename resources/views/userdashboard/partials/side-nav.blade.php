@@ -5,10 +5,10 @@
             <img src="{{ $users->image ?? asset('assets/img/user.png')}}" alt="">
             </div>
             <div class="user_name">
-                {{ $users->email ?? ''}}
+                {{ getProfileDetails('email') ?? ''}}
             </div>
             <span>
-                Kathmandu, Nepal
+                {{ getProfileDetails('address') ?? ''}}
             </span>
         </div>
         <div class="d_navigation">
@@ -24,12 +24,12 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{ route('saveCourseLater') }}">
                         <i class="far fa-user"></i> Saved Courses
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{ route('purchasedCourse') }}">
                         <i class="far fa-user"></i> All Courses
                     </a>
                 </li>

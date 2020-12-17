@@ -71,11 +71,9 @@ class LoginController extends Controller
             'password' => $request->password,
         );
 
-
         try {
             if ($user = Sentinel::authenticate($credentials)) {
-
-                return redirect()->route('userProfile');
+                return redirect()->route('userDashboard');
 
             } else {
                 Session::flash('failed', __('Incorrect Email or Password'));
