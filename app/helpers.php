@@ -6,6 +6,7 @@ use App\Model\PostType;
 use App\Model\GobalPost;
 use App\Model\GobalPostMeta;
 use App\Model\Category;
+use App\Model\PackageItem;
 use App\Model\SiteSetting;
 use App\Repositories\RepoCourse\CourseInterface;
 use App\Repositories\RepoCourse\CourseRepository;
@@ -273,6 +274,26 @@ function getSavedCourseByType($request)
     }
         
 }
+function getCoursesByModel($course) 
+{
+    $interface = new CourseRepository();
+    if($course->purchaseble_type == "App\Model\Book"){
+        $book = $interface->getBookModelById($course->purchaseble_id);
+        return $book;
+    }
+
+    if($course->purchaseble_type == "App\Model\Video"){
+        $video = $interface->getVideoModelById($course->purchaseble_id);
+        return $video;
+    }
+
+    if($course->purchaseble_type == "App\Model\Package"){
+        $package = $interface->getPackageModelById($course->purchaseble_id);
+        return $package;
+    }
+        
+}
+
 function getProfileDetails($key)
 {
     $users = Sentinel::getUser();

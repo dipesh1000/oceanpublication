@@ -36,9 +36,17 @@ class CategoryController extends Controller
         $category= Category::where('id', $cat_id)->first();
         $child_cat_ids = $category->getAllChildren()->pluck('id')->toArray();
         array_push($child_cat_ids, $cat_id);
-        $books = Book::whereIn('category_id',$child_cat_ids)->get();
+        $books = Book::whereIn('category_id',$child_cat_ids)->where('offer_price', '>', 0)->get();
+        return view('frontend.book.books', compact('books'));
+    }
+    public function videoByCat(Request $request)
+    {
+        $cat_id = $request->cat_id; 
+        $category= Category::where('id', $cat_id)->first();
+        $child_cat_ids = $category->getAllChildren()->pluck('id')->toArray();
+        array_push($child_cat_ids, $cat_id);
         $videos = Video::whereIn('category_id', $child_cat_ids)->get();
-        return view('frontend.category.books', compact('books', 'videos'));
+        return view('frontend.video.videos', compact('videos'));
     }
     
 }

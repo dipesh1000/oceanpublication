@@ -25,6 +25,12 @@ class FrontpageController extends Controller
             ->where('status','Active')
             ->where('parent_id', 0)
             ->get();
+
+        $freeLibrary = Book::take(4)
+        ->orderBy('ID','DESC')
+        ->where('offer_price', 0)
+        ->where('status','Active')
+        ->get();    
         
         $newsAndEvents = GobalPost::where('post_type', 5)
             ->orderBy('ID','DESC')
@@ -32,13 +38,14 @@ class FrontpageController extends Controller
             ->take(3)
             ->get();
 
+
         $mainSliders = GobalPost::where('post_type', 7)
             ->orderBy('ID','DESC')
             ->where('status','Active')
             ->take(3)
             ->get();
 
-        return view('frontend.front-page', compact('packages', 'categories', 'newsAndEvents', 'mainSliders'));
+        return view('frontend.front-page', compact('packages', 'categories', 'newsAndEvents', 'mainSliders', 'freeLibrary'));
     }
     public function getSearch(Request $request)
     {

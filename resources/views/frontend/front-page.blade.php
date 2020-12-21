@@ -30,6 +30,11 @@
                                 <li>
                                     @include('frontend.cart.mini-cart')
                                 </li>
+                                @if ($user = Sentinel::check())
+                                <li class="p-1 ml-4">
+                                    <a href="{{ route('userDashboard') }}"><i class="fa fa-user-circle"></i>{{ $user->first_name }}</a>
+                                </li>
+                                @endif
 							</ul>
 							<ul class="second-navbar-wrapper">
 								<li>
@@ -73,9 +78,13 @@
 									</a>
                                 </li>
                                 <li>
-									<a href="" data-toggle="modal" data-target="#signin">
-										Login
-									</a>
+                                    @if ($user = Sentinel::check())
+                                        <a href="">Logout</a>
+                                    @else
+                                        <a href="" data-toggle="modal" data-target="#signin">
+                                            Login
+                                        </a>
+                                    @endif
                                 </li>
                                    <li>
                                     <form action="{{ url('/search') }}" type="get" role="search">
@@ -113,7 +122,7 @@
 				</div>
 		</div>
 
-        <!-- <div class="banner_box_container">
+        {{-- <div class="banner_box_container">
             <div class="container">
                 <div class="trips_container">
                     <div class="row no-gutters">
@@ -166,9 +175,75 @@
                 </div>
                 
             </div>
-        </div> -->
-
+        </div>  --}}
         <div class="our_publication_container">
+            <div class="our_publication_header">
+                 Our Programs
+             </div>
+             <div class="row">
+                 <div class="col-md-6 col-xl-2">
+                     
+                 </div>
+                 <div class="col-md-6 col-xl-4">
+                     <div class="program-body program-border">
+                         <div class="program-icon">
+                             <i class="fas fa-book" style="color: #104c8d"></i>
+                         </div>
+                         <a href="{{ route('getAllBooks') }}">
+                             <h1 class="text-heading" style="color: #104c8d">Books</h1>
+                         </a>
+                         <p>
+                             You Will get all the book that need for any upcoming examination, or preparing any other entrance.
+                         </p>
+                         <a class="btn btn-outline-primary" href="{{ route('getAllBooks') }}">Browse Now</a>
+                     </div>
+                 </div> 
+                 <div class="col-md-6 col-xl-4">
+                     <div class="program-body">
+                         <div class="program-icon">
+                            <i class="fas fa-video" style="color: #104c8d"></i>
+                         </div>
+                         <a href="{{ route('getAllVideos') }}">
+                             <h1 class="text-heading" style="color: #104c8d">Videos</h1>
+                         </a>
+                         <p>
+                            Creating video tutorials relieves almost all of the stress that can come from introducing programs.
+                         </p>
+                         <a class="btn btn-outline-primary" href="{{ route('getAllVideos') }}">Browse Now</a>
+                     </div>
+                 </div> 
+             </div>
+     </div>
+        {{-- <div class="our_publication_container">
+            <div class="our_publication_header">
+                 Our Publications
+             </div>
+             <div class="row">
+                 @foreach ($categories as $category)
+                     <div class="col-md-6 col-xl-3">
+                         <a href="{{ route('category.single', $category->slug) }}">
+                             <div class="publication_container">
+                             <div class="book_icon">
+                             <i class="{{ $category->icon ?? 'fas fa-book-open' }}"></i>
+                                 </div>
+                                 <div class="book_container_title">
+                                 <i class="fas fa-film"></i>  {{ $category->title }}
+                                 </div>
+                                 <div class="book_container_text"> 
+                                 </div>
+                                 <div class="book_container_btn">
+                                     <span>
+                                         Browse Now
+                                     </span>
+                                 
+                                 </div>
+                             </div>
+                         </a> 
+                     </div>
+                 @endforeach
+             </div>
+     </div> --}}
+        {{-- <div class="our_publication_container">
                <div class="our_publication_header">
                     Our Publications
                 </div>
@@ -184,8 +259,6 @@
                                     <i class="fas fa-film"></i>  {{ $category->title }}
                                     </div>
                                     <div class="book_container_text"> 
-                                        {{-- {!! \Illuminate\Support\Str::limit($category->description, 20, '...') !!} --}}
-                                        {{-- {!! $category->description !!} --}}
                                     </div>
                                     <div class="book_container_btn">
                                         <span>
@@ -198,21 +271,26 @@
                         </div>
                     @endforeach
                 </div>
-        </div>
-        <!-- <div class="our-video-library">
+        </div> --}}
+        @if($freeLibrary)
+        <div class="our-video-library">
             <div class="video-library-title">
-                Our Video Library
+                Our Library
             </div>
-            <div class="video-slider">
-               <div class="">
-                <div class="video-item">
-                    <div class="img-container">
-                        <img src="img/banner11.jpg" class="img-fluid" alt="">
+            <div class="video-slider container">
+               <div class="row">
+                @foreach ($freeLibrary as $library)
+                    <div class="video-item col-md-2">
+                        <div class="img-container">
+                            <div class="_df_thumb" source="{{ $library->book }}"
+                                tags="3d,images" thumb="{{ $library->image }}">{{ $library->title }}</div>
+                        </div>
                     </div>
-                </div>
+                @endforeach
                </div>
             </div>
-        </div> -->
+        </div>
+        @endif
         <div class="our_package_container">
             <div class="container">
                 <div class="our_package_header">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Book;
+use App\Model\Category;
 
 class BooksController extends Controller
 {
@@ -12,8 +13,21 @@ class BooksController extends Controller
     {
         $books = Book::orderBy('ID','DESC')
             ->where('status','Active')
+            ->where('offer_price','>',0)
             ->paginate(12);
-        return view('frontend.book.index',compact('books'))
+
+        $categories = Category::orderBy('ID', 'DESC')
+        ->where('status', 'Active')
+        ->where('parent_id', 0)
+        ->get();
+
+        $cats = [];
+        foreach ( $categories as $category ) {
+            $cats[] = Category::with('childs.childs')
+            ->where('id', $category->id)
+            ->get();
+        }
+        return view('frontend.book.index',compact('cats', 'books'))
             ->with('i', (request()->input('page', 1) - 1) * 12);
     }
     public function getBooksBySlug($slug)

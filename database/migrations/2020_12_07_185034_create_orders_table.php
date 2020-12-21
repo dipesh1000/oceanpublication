@@ -15,13 +15,11 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('master_order_id');
             $table->unsignedInteger('purchaseble_id')->nullable();
             $table->string('purchaseble_type')->nullable();
             $table->string('order_date')->nullable();
             $table->double('price')->nullable();
-            $table->string('payment_method')->nullable();
-            $table->enum('status', ['Active', 'Inactive', 'Pending', 'Block']);
             $table->timestamps();
         });
     }

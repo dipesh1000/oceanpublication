@@ -32,7 +32,10 @@ Route::group(
     //books
     Route::get('books', 'BooksController@index')->name('getAllBooks');
     Route::get('book/{slug}', 'BooksController@getBooksBySlug')->name('book.single');
+
+    //ajax for books and videos
     Route::get('bookByCat', 'CategoryController@bookByCat');
+    Route::get('videoByCat', 'CategoryController@videoByCat');
 
     //vidoes
     Route::get('videos', 'VideoController@index')->name('getAllVideos');
@@ -74,9 +77,17 @@ Route::group([
     Route::get('/profile/edit/{id}', 'ProfileController@userProfileEdit')->name('userProfileEdit');
     Route::patch('/profile/edit/{id}', 'ProfileController@updateProfile')->name('updateProfile');
     Route::post('/checkout', 'OrderController@store')->name('checkout.store');
+    Route::any('/esewa/success', 'EsewaController@success');
+    Route::any('/esewa/failure', 'EsewaController@failure');
+    Route::any('/esewa/response', 'EsewaController@response')->name('payment.response');
     //save course for later
     Route::get('/save-course-later', 'SavedCourseController@getSavedCourse')->name('saveCourseLater');
     Route::get('/courses', 'CourseController@getAllCourses')->name('purchasedCourse');
+    Route::get('/courses/video/{id}', 'CourseController@getSingleVideo')->name('purchasedCourseVideo');
+    Route::get('/courses/book/{id}', 'CourseController@getSingleBook')->name('purchasedCourseBook');
+    Route::get('/courses/package/{id}', 'CourseController@getSinglePackage');
+    Route::post('/feedback', 'FeedbackController@store')->name('feedback.store');
+
 });
 Route::group(
     [

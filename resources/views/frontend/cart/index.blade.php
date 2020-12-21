@@ -62,7 +62,11 @@
               Total
               <p class="cart-total-price">Rs. {{ $total }} /-</p>
               <p><del>Rs. 12000</del></p>
-              <button class="cart-checkout-button checkout" data-total="{{ $total }}">Checkout</button>
+              <form action="{{ route('checkout.store')  }}" method="post">
+                {{ csrf_field() }}
+                <input type="hidden" name="ttlPrice" value="{{ $total }}">
+                <button class="cart-checkout-button checkout" data-total="{{ $total }}">Checkout</button>
+              </form>
             </div>
           </div>
         </div>
@@ -94,40 +98,72 @@
     })
    
     // Order Store Request
-    $(document).on("click", ".checkout", function (e) {
-            e.preventDefault();
-            var $this = $(this);
-            var price = $this.attr('data-total');
-            // alert($price);
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+    // $(document).on("click", ".checkout", function (e) {
+    //         e.preventDefault();
+    //         var $this = $(this);
+    //         var price = $this.attr('data-total');
+    //         alert($price);
+    //         $.ajaxSetup({
+    //             headers: {
+    //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //             }
+    //         });
 
-            $.ajax({
-                type: "POST",
-                url: "{{ route('checkout.store')  }}",
-                data: {
-                    price: price
-                },
-                beforeSend: function () {
-                    $this.prop('disabled', true);
-                },
-                success: function (data) {
-                  if (data.status) {
-                    swal(data.status, data.message, "success");
-                  }
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    console.log(thrownError);
-                },
-                complete: function () {
-                    location.reload();
-                }
-            });
+    //         $.ajax({
+    //             type: "POST",
+    //             url: "{{ route('checkout.store')  }}",
+    //             data: {
+    //                 price: price
+    //             },
+    //             beforeSend: function () {
+    //                 $this.prop('disabled', true);
+    //             },
+    //             success: function (data) {
+    //               if (data.status) {
+    //                 swal(data.status, data.message, "success");
+    //               }
+    //             },
+    //             error: function (xhr, ajaxOptions, thrownError) {
+    //                 console.log(thrownError);
+    //             },
+    //             complete: function () {
+    //                 location.reload();
+    //             }
+    //         });
 
-        });
+    //     });
+        
+    //payment with esewa
+    // var path="https://uat.esewa.com.np/epay/main";
+    // var params= {
+    //     amt: 100,
+    //     psc: 0,
+    //     pdc: 0,
+    //     txAmt: 0,
+    //     tAmt: 100,
+    //     pid: "ee2c3ca1-696b-4cc5-a6be-2c40d929d453",
+    //     scd: "EPAYTEST",
+    //     su: "http://merchant.com.np/page/esewa_payment_success",
+    //     fu: "http://merchant.com.np/page/esewa_payment_failed"
+    // }
+
+    // function post(path, params) {
+    //     var form = document.createElement("form");
+    //     form.setAttribute("method", "POST");
+    //     form.setAttribute("action", path);
+
+    //     for(var key in params) {
+    //         var hiddenField = document.createElement("input");
+    //         hiddenField.setAttribute("type", "hidden");
+    //         hiddenField.setAttribute("name", key);
+    //         hiddenField.setAttribute("value", params[key]);
+    //         form.appendChild(hiddenField);
+            
+    //     }
+
+    //     document.body.appendChild(form);
+    //     form.submit();
+    // }
   </script>
 
   @endpush

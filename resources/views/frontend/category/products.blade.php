@@ -18,7 +18,7 @@
                                 Rs 600
                             </div> -->
                         </div>
-                    <a href="{{ route('getAllBooks') }}">
+                        <a href="{{ route('getAllBooks') }}">
                             <div class="course_title">
                                 Books
                             </div>

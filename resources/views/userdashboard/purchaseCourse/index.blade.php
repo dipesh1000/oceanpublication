@@ -11,38 +11,11 @@
                         <div class="allcourses-content">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    @if (count($coursesList) > 0)
-                                    <div class="row">
-                                        @foreach ($coursesList as $course)
-                                        <div class="col-lg-3 col-md-6 col-sm-6">
-                                            <div class="course-element">
-                                                <div class="course-element-image">
-                                                <img src="{{ $course->image }}" />
-                                                </div>
-                                                <div class="course-element-details">
-                                                    <div class="course-element-title">
-                                                        {{ $course->title }}
-                                                    </div>
-                                                    <div class="course-name-divider"></div>
-                                                    {{-- <div class="course-element-subtitle">
-                                                        {!! \Illuminate\Support\Str::limit($course->description, 150, '...') !!}
-                                                    </div> --}}
-                                                    {{-- <div class="d-flex justify-content-between align-items-baseline">
-                                                    <div class="course-element-price">{{ $course->offer_price }}</div>
-                                                    @if($course->type == 'book')
-                                                    <a href="{{ route('book.single', $course->slug) }}" class="btn-sm btn-primary">View</a>
-                                                    @elseif($course->type == 'video')
-                                                    <a href="{{ route('video.single', $course->slug) }}" class="btn-sm btn-primary">View</a>
-                                                    @else
-                                                    <a href="{{ route('package.single', $course->slug) }}" class="btn-sm btn-primary">View</a>
-                                                    @endif
-                                                    </div> --}}
-                                                </div>
-                                            </div>
-                                        </div> 
-                                        @endforeach
+                                    <div id="courseData">
+                                        @if (count($coursesList) > 0)
+                                            @include('userdashboard.purchaseCourse.packList')
+                                        @endif
                                     </div>
-                                    @endif
                                     {{ $coursesList->links() }}
                                 </div>
                             </div>
@@ -54,3 +27,40 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+<script>
+     $(document).on("click", ".packageList", function (e) {
+            e.preventDefault();
+            var $this = $(this);
+            var courseId = $this.attr('data-id');
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                dataType: "html",
+                type: "GET",
+                url: "/courses/package/" + courseId,
+                data: {
+                    courseId: courseId
+                },
+                // beforeSend: function () {
+                //     $this.prop('disabled', true);
+                // },
+                success: function (data) {
+                    console.log(data);
+                    $("#courseData").html(data);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(thrownError);
+                },
+                complete: function () {
+                    // location.reload();
+                }
+            });
+
+        });
+</script>
+@endpush

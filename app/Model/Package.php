@@ -55,4 +55,8 @@ class Package extends Model
     {
         return $this->morphMany(SavedCourse::class, 'saveable');
     }
+    public function courseItem()
+    {
+        return $this->morphMany(Feedback::class, 'coursable');
+    }
 }

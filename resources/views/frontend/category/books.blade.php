@@ -16,8 +16,8 @@
                     <div class="new-price">Rs. {{ $result->offer_price }} </div>
                 </div>
                 <div class="book_button">    
-                <a class="btn_addcart" href=""><i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                    Add To Cart</a>
+                {{-- <a class="btn_addcart" href=""><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    Add To Cart</a> --}}
                 </div>
             </div>
         </div>

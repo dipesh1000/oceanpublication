@@ -754,7 +754,6 @@ footer .backtop {
 }
 
 #index_page .our_package_container {
-  background: #f4f5f7;
   padding: 80px 0;
 }
 
@@ -877,6 +876,7 @@ footer .backtop {
 }
 
 #index_page .news_container {
+  background: #f4f5f7;
   padding: 80px 0;
 }
 
@@ -1434,7 +1434,6 @@ footer .backtop {
 }
 
 #packages_page .our_package_container {
-  background: #f4f5f7;
   padding: 80px 0;
 }
 
@@ -3012,6 +3011,33 @@ footer .backtop {
   font-size: 14px;
   color: #4a5682;
 }
+.program-body {
+  text-align: center;
+  padding: 2em;
+}
+
+.program-body .program-icon i {
+  font-size: 5em;
+}
+
+.program-body .a {
+  color: #126f9c;
+}
+
+.program-body .a h1 {
+  color: #647b9c;
+}
+
+.program-body p {
+  color: #647b9c;
+  font-weight: 600;
+}
+
+.program-border {
+  border-right: 2px dashed;
+}
+
+
 .cart-in-navbar .cart-icon {
   position: relative;
 }
@@ -3245,6 +3271,52 @@ footer .backtop {
 
 .cart-savedcourses-content .cart-total-checkout-price-section .cart-checkout-button:hover {
   background-color: #ff6161;
+}
+
+.rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center
+}
+
+.rating>input {
+  display: none
+}
+
+.rating>label {
+  position: relative;
+  width: 1em;
+  font-size: 2vw;
+  color: #FFD600;
+  cursor: pointer
+}
+
+.rating>label::before {
+  content: "\2605";
+  position: absolute;
+  opacity: 0
+}
+
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+  opacity: 1 !important
+}
+
+.rating>input:checked~label:before {
+  opacity: 1
+}
+
+.rating:hover>input:checked~label:before {
+  opacity: 0.4
+}
+
+.card-details li {
+  color: #008fd5;
+}
+.card-details li > span {
+  color: #1d56a2;
+  font-weight: 500;
+  font-size: 14px;
 }
 
 @media (max-width: 992px) {

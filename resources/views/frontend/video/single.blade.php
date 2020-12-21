@@ -43,12 +43,6 @@
                         <div class="review">
                             <i class="far fa-star"></i> <span>4.7 Reviews</span> 
                         </div>
-                        <div>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                                <i class="fa fa-play-circle" aria-hidden="true"></i> Play Video
-                              </button>
-                            
-                        </div>
                     </div>
                 </div>
             </div>
@@ -256,17 +250,6 @@
 
 </div>
 
-  
-  <!-- Modal -->
-  <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-body">
-        <div style="position:relative; overflow:hidden; padding-bottom:56.25%"> <iframe src="https://cdn.jwplayer.com/players/{{$video->video}}-Fy9ggf0s.html" width="100%" height="100%" frameborder="0" scrolling="auto" title="Test Video" style="position:absolute;" allowfullscreen></iframe> </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
 @endsection
 @push('scripts')
@@ -349,6 +332,7 @@
             });
         });
 
+
         //save for later
         $(document).on("click", ".save-course-later", function (e) {
             e.preventDefault();
@@ -388,7 +372,6 @@
                     // location.reload();
                 }
             });
-
         });    
     
 </script>

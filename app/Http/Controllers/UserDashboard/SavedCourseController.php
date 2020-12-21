@@ -61,7 +61,8 @@ class SavedCourseController extends Controller
     }
     public function getSavedCourse()
     {
-        $savedCourse = SavedCourse::all();
+        $user = Sentinel::getUser();
+        $savedCourse = SavedCourse::where('user_id', $user->id)->get();
         $courses = [];
         foreach ($savedCourse as $courseItem){
             $ss = $courseItem->saveable_type;
@@ -76,6 +77,6 @@ class SavedCourseController extends Controller
             }
         }
         return view('userdashboard.savedcourse.index', compact('courses'));
-        
+
     }
 }
