@@ -31,9 +31,9 @@
                                 <th>Sn</th>
                                 <th>Title</th>
                                 <th>Parent Category</th>
-                                <th>Image</th>
+                                {{-- <th>Image</th> --}}
                                 <th>Status</th>
-                                <th>Icon</th>
+                                {{-- <th>Icon</th> --}}
                                 <th class="no-content">Action</th>
                             </tr>
                             </thead>
@@ -43,11 +43,11 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $category->title }}</td>
                                 <td>{{ $category->parent?$category->parent->title:"" }}</td>
-                                <td class="text-left">
+                                {{-- <td class="text-left">
                                     <span><img src="{{ asset($category->image) }}" width="50" ></span>
-                                </td>
-                                <td> @if($category == "Active" ) <span class="badge badge-success">Active</span> @else <span class="badge badge-danger">Inactive</span> @endif</td>
-                                <td>{{ $category->icon }}</td>
+                                </td> --}}
+                                <td> @if($category->status == "Active" ) <span class="badge badge-success">Active</span> @else <span class="badge badge-danger">Inactive</span> @endif</td>
+                                {{-- <td>{{ $category->icon }}</td> --}}
                                 <td>
 
                                     <a href="{{ route('admin.category.edit', $category->id) }}" title="Edit" class="badge badge-success"> <i data-feather="edit"></i></a>
@@ -62,9 +62,9 @@
                                 <th>Sn</th>
                                 <th>Title</th>
                                 <th>Parent Category</th>
-                                <th>Image</th>
+                                {{-- <th>Image</th> --}}
                                 <th>Status</th>
-                                <th>Icon</th>
+                                {{-- <th>Icon</th> --}}
                                 <th class="no-content">Action</th>
                             </tr>
                             </tfoot>

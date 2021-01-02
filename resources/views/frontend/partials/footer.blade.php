@@ -116,6 +116,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="{{ asset('assets/dflip/js/dflip.min.js') }}"></script>
     <script src="{{ asset('assets/js/app.js') }}" defer></script>
+    {{-- <script src="{{ asset('assets/toastr/toastr.min.js') }}" defer></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/js/toastr.min.js"></script>
+    {!! Toastr::message() !!}
 
 
     <script>

@@ -3,7 +3,7 @@
         <div class="col-md-3 col-6">
             <div class="book_list">
                 <div class="book_img">
-                    <span class="badge badge-primary">Video</span>
+                    {{-- <span class="badge badge-primary">Video</span> --}}
                     <a href="{{ route('video.single', $book->slug) }}"><img class="img-fluid" src="{{ $book->image }}" alt=""></a>
                 </div>
                 <div class="book_description">
@@ -11,10 +11,10 @@
                 </div>
                 
                 <div class="row">
-                    <div class="col-md-6" style="align-self: center">
-                        reviews 4.5 <label for="5" style="margin-bottom: .1rem; font-size: 1.5vw;">☆</label>
+                    <div class="col-md-7" style="align-self: center">
+                        4.5 <i class="fa fa-star" style="color: orange"></i> Reviews
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <div class="rating"> 
                             <input type="radio" name="rating" value="5" id="5">
                             <label for="5" style="margin-bottom: .1rem; font-size: 1.5vw;">☆</label> 
@@ -30,7 +30,7 @@
                     </div>
                 </div>
 
-                <div class="row" style="height: 80px">
+                {{-- <div class="row" style="height: 80px">
                     <div class="col-md-6">
                         <ul class="card-details">
                             <li>
@@ -51,7 +51,7 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="book-nav">
                     <div class="book_price">

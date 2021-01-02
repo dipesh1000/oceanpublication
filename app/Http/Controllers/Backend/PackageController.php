@@ -210,13 +210,21 @@ class PackageController extends Controller
     public function destroy($id)
     {
         $package = Package::find($id);
-        if($package){
-            imageDelete($package);
-            $package->delete();
-            return redirect()->back()->with('success', 'Package Successfully Deleted.');
-        }else{
-            return redirect()->back()->with('errors', 'Package Not Found!!! Refresh your page.');
+
+        if($package->orderItem->isEmpty()) {
+            if($package){
+                imageDelete($package);
+                $package->delete();
+                return redirect()->back()->with('success', 'Package Successfully Deleted.');
+            }else{
+                return redirect()->back()->with('error', 'Package Not Found!!! Refresh your page.');
+            }
         }
+        else {
+            return redirect()->back()->with('error', 'Some users purchase this Book!! you are unable to delete this.');
+        }
+
+       
     }
 
 

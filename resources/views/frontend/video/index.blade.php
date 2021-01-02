@@ -1,5 +1,22 @@
 @extends('frontend.layouts.app')
 @section('content')
+<style>
+    
+    .aside_drop {
+        border-bottom: 1px solid #0487ce;
+    }
+    .aside_drop:hover {
+        background: linear-gradient(45deg, #c3cbd6, #ffffff)!important;
+        color: #fff;
+        display: block;
+    }
+    .aside_drop li {
+        padding-left: 25px;
+    }
+    .aside_drop li:hover {
+        color: #fff;
+    }
+</style>
 <div id="product_page">
     <div class="container-fluid book_filter">
        <div class="filter_title" data-toggle="collapse" data-target="#filter_list">
@@ -35,7 +52,7 @@
 <div class="container-fluid">
    <div class="row">
 
-       <div class="col-2 asider">
+       <div class="col-3 asider">
            <aside>
                <div class="aside_header">
                    Categories
@@ -73,7 +90,7 @@
            </aside>
        </div>
 
-       <div class="col-12  col-md-10">
+       <div class="col-12  col-md-9">
            <main>
                 <div class="bread_container">
                     <ul class="bread">

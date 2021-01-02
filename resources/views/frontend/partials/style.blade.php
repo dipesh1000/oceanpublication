@@ -7,3 +7,5 @@
 	<link rel="stylesheet" href="{{ asset('cork/plugins/sweetalerts/sweetalert2.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/dflip/css/dflip.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/dflip/css/themify-icons.css') }}">
+	{{-- <link rel="stylesheet" href="{{ asset('assets/toastr/toastr.min.css') }}"> --}}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/css/toastr.min.css">

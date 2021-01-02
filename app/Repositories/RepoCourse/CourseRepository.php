@@ -26,19 +26,20 @@ class CourseRepository implements CourseInterface
         $package->type = 'package';
         return $package;
     }
-    public function getBookModelById($id)
-    {
-        $book = Book::where('id', $id)->first();
-        return $book;
-    }
-    public function getVideoModelById($id)
-    {
-        $video = Video::where('id', $id)->first();
-        return $video;
-    }
-    public function getPackageModelById($id)
-    {
-        $package = Package::where('id', $id)->first();
-        return $package;
-    }
+    // public function getBookModelById($id)
+    // {
+    //     $book = Book::where('id', $id)->first();
+    //     return $book;
+    // }
+    // public function getVideoModelById($id)
+    // {
+    //     $video = Video::where('id', $id)->first();
+    //     dd($video);
+    //     return $video;
+    // }
+    // public function getPackageModelById($id)
+    // {
+    //     $package = Package::where('id', $id)->first();
+    //     return $package;
+    // }
 }

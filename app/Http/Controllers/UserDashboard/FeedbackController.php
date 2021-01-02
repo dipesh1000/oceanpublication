@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Feedback;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
+use Brian2694\Toastr\Facades\Toastr;
 
 class FeedbackController extends Controller
 {
@@ -18,11 +19,16 @@ class FeedbackController extends Controller
             $review->coursable_id = $request->courseId;
             $review->coursable_type = get_class(getSavedCourseByType($request));
             $review->star = $request->rating;
-            $review->review = $review->review;
-            $review->save();
-            return redirect()->back()->with('success', 'Thank you for your Feedback');
+            $review->review = $request->review;
+            $save = $review->save(); 
+            if($save) {
+                Toastr::success('Success', 'Thank you for you feedback');
+            }
+            return redirect()->back();
         } catch (\Throwable $e) {
-            return redirect()->back()->with('errors', 'Error While Feedback');
+            Toastr::error($e->getMessage(), "Operation Failed");
+            return redirect()->back();
         }
+        
     }
 }

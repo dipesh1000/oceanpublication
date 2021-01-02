@@ -21,7 +21,12 @@ class PackageController extends Controller
     public function singlePackage($slug)
     {
         $package = Package::where('slug', $slug)->first();
-        return view('frontend.packages.single', compact('package'));
-        // return $packitem;
+        $similarPackages = Book::orderBy('ID','DESC')
+            ->where('category_id', $package->category_id)
+            ->where('id', '!=' , $package->id)
+            ->where('status','Active')
+            ->take(3)
+            ->get();
+        return view('frontend.packages.single', compact('package', 'similarPackages'));
     }
 }

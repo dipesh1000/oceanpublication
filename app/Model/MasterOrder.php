@@ -6,6 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class MasterOrder extends Model
 {
+
+    protected $fillable = [
+        'user_id',
+        'invoice_no',
+        'status',
+        'grandTotal',
+        'payment_method',
+    ];
+    
     const STATUS_ACTIVE = 1;
     const STATUS_PENDING = 2;
     const STATUS_CHECKOUT  = 3;

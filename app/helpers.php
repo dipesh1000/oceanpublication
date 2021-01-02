@@ -294,6 +294,7 @@ function getCoursesByModel($course)
         
 }
 
+
 function getProfileDetails($key)
 {
     $users = Sentinel::getUser();

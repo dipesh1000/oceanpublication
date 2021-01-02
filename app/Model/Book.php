@@ -56,7 +56,7 @@ class Book extends Model
 
     public function orderItem()
     {
-        return $this->morphMany(Order::class, 'orderable');
+        return $this->morphMany(Order::class, 'purchaseble');
     }
     public function savedItem()
     {

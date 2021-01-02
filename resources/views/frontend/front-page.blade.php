@@ -51,12 +51,6 @@
 										Packages
 									</a>
 								</li>
-								<li>
-                                <a href="{{ route('categoryType') }}">
-										Product
-									</a>
-                                </li>
-                              
                                     <li class="fixed-visible">
                                         <a href="">
                                             Publication
@@ -282,8 +276,9 @@
                 @foreach ($freeLibrary as $library)
                     <div class="video-item col-md-2">
                         <div class="img-container">
-                            <div class="_df_thumb" source="{{ $library->book }}"
-                                tags="3d,images" thumb="{{ $library->image }}">{{ $library->title }}</div>
+                            
+                            <div style="background-color: #ddd!important" class="_df_thumb" source="{{ $library->book }}"
+                                tags="" thumb="{{ $library->image }}">{{ $library->title }}</div>
                         </div>
                     </div>
                 @endforeach
@@ -307,7 +302,8 @@
                                     <img class="img-fluid" src="{{ $package->image }}" alt="{{ $package->title }}">
                                 </a>  
                                 <div class="course_price">
-                                    {{ $package->offer_price }}
+                                    <div>Rs.{{ $package->offer_price }}</div>
+                                    <del>Rs.{{ $package->price }}</del>
                                 </div>
                             </div>
                             <div class="course_title">
@@ -413,11 +409,21 @@
                 </div>
                 <div class="col-md-8">
                     <div class="img-container">
-                        <img src="{{ asset('assets/img/app-mockup.webp') }}" class="img-fluid" alt="">
+                        <img src="{{ asset('assets/img/app.png') }}" class="img-fluid" alt="">
                     </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script>
+        var option_button_pdf = {
+            source:'http://www.yoursite.com/someplace/pdf-to-be-loaded.pdf',
+            webgl:true,
+            height:500
+            //we recommend using default auto height
+        };
+    </script>
+@endpush
 

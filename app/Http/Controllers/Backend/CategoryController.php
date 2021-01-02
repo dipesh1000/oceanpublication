@@ -17,7 +17,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::orderBy('id', 'desc')->get();
         return view('admin.category.index', compact('categories'));
     }
 
@@ -76,7 +76,7 @@ class CategoryController extends Controller
             $category->image = imageupload('/upload/category/', $request->file('image'));
             $response = $category->save();
             if($response){
-                return redirect()->back()->with('success', 'Category Successfully Created.');
+                return redirect('/backend/category')->with('success', 'Category Successfully Created.');
             }else{
                 return redirect()->back()->with('error', 'Error while creating Category');
             }
@@ -144,7 +144,7 @@ class CategoryController extends Controller
 
             $response = $category->update();
             if($response){
-                return redirect()->back()->with('success', 'Category Successfully Updated.');
+                return redirect('/backend/category')->with('success', 'Category Successfully Updated.');
             }else{
                 return redirect()->back()->with('errors', 'Error while updating Category');
             }

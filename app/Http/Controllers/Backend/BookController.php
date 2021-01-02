@@ -19,7 +19,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::all();
+        $books = Book::orderBy('id', 'desc')->get();
         return view('admin.book.index', compact('books'));
     }
 
@@ -87,7 +87,7 @@ class BookController extends Controller
             $book->status = $request->status=="on"?"Active":"Inactive";
             $response = $book->save();
             if($response){
-                return redirect()->back()->with('success', 'Book Successfully Created.');
+                return redirect()->route('admin.book')->with('success', 'Book Successfully Created.');
             }else{
                 return redirect()->back()->with('error', 'Error while creating Book!!');
             }
@@ -109,9 +109,9 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        $video = Video::find($id);
-        if($video){
-            return view('admin.video.preview', compact('video'));
+        $book = Book::find($id);
+        if($book){
+            return view('admin.book.preview', compact('book'));
         }else{
             return redirect()->back()->with('errors', 'Video Not Found!!! Refresh your page.');
         }
@@ -171,7 +171,7 @@ class BookController extends Controller
             $book->status = $request->status=="on"?"Active":"Inactive";
             $response = $book->update();
             if($response){
-                return redirect()->back()->with('success', 'Book Successfully Updated.');
+                return redirect()->route('admin.book')->with('success', 'Book Successfully Updated.');
             }else{
                 return redirect()->back()->with('error', 'Error while Updating Book!!');
             }
@@ -190,13 +190,21 @@ class BookController extends Controller
     public function destroy($id)
     {
         $book = Book::find($id);
-        if($book){
-            imageDelete($book);
-            $book->delete();
-            return redirect()->back()->with('success', 'Book Successfully Deleted.');
-        }else{
-            return redirect()->back()->with('errors', 'Book Not Found!!! Refresh your page.');
+
+        if($book->orderItem->isEmpty()) {
+            if($book){
+                imageDelete($book);
+                $book->delete();
+                return redirect()->back()->with('success', 'Book Successfully Deleted.');
+            }else{
+                return redirect()->back()->with('error', 'Book Not Found!!! Refresh your page.');
+            } 
         }
+        else {
+            return redirect()->back()->with('error', 'Some users purchase this Book!! you are unable to delete this.');
+        }
+
+        
     }
 
 }

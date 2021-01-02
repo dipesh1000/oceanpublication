@@ -23,25 +23,117 @@
 
     </div> -->
 
-    <div class="detail_header_container">
-        <div class="container">
+    <div class="detail_header_container" style="padding: 32px 0">
+        <div class="">
             <div class="row">
-                <div class="col-md-4">
-                    <div class="image_container">
-                        <img class="img-fluid" src="{{ $video->image }}" alt="{{ $video->title }}">
-                    </div>
+                <div class="col-md-3 asider">
+                    <aside>
+                        <div class="aside_header" style="padding-left: 25px">
+                            {{ $child_cat->title }}
+                        </div>
+                             @foreach ($child_cat->childs as $catItem)
+                             <div class="aside_drop" data-toggle="collapse" data-target="#drop{{ $catItem->id }}">
+                                 <li id="cat{{$catItem->id}}" class="selectCategory" value="{{$catItem->id}}">{{ $catItem->title }}</li> 
+                                 <span>&blacktriangledown;</span>
+                             </div>
+                             @if($catItem->childs)
+                                 @foreach ($catItem->childs as $child_cats)
+                                     <div class="collapse" id="drop{{ $catItem->id }}"> 
+                                         <div class="aside_list" data-toggle="collapse" data-target="#drop{{ $child_cats->id }}">
+                                             <li id="cat{{$child_cats->id}}" class="selectCategory" value="{{$child_cats->id}}">
+                                                 {{ $child_cats->title }}
+                                             </li> 
+                                         </div>
+                                     </div>
+                                 @endforeach
+                             @endif
+                             @endforeach
+                    </aside>
                 </div>
-                <div id="player"></div>
-                <div class="col-md-8">
-                    <div class="course_detail_container">
-                        <div class="header">
-                            {{ $video->title }}
+                <div class="col-md-9">
+                    <div id="videosData">
+                        {{-- @include('frontend.book.books') --}}
+                    </div>
+                    <div class="row singleBook">
+                        <div class="col-md-7">
+                            <div class="image_container">
+                                <img class="img-fluid" src="{{ $video->image }}" alt="{{ $video->title }}">
+                            </div>
                         </div>
-                        <div class="description">
-                            {!! $video->description !!}
-                        </div>
-                        <div class="review">
-                            <i class="far fa-star"></i> <span>4.7 Reviews</span> 
+                        <div class="col-md-5">
+                            <div class="course_detail_container">
+                                <div class="header">
+                                    {{ $video->title }}
+                                </div>
+                                <div class="description">
+                                    <table>
+                                        <tr>
+                                            <th>SKU</th>
+                                            <td> &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp; </td>
+                                            <td>{{ $video->sku }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>ISBN No</th>
+                                            <td> &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp; </td>
+                                            <td>{{ $video->isbn_no }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Author</th>
+                                            <td> &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp; </td>
+                                            <td>{{ $video->author }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Edition</th>
+                                            <td> &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp; </td>
+                                            <td>{{ $video->edition }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>video Type</th>
+                                            <td> &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp; </td>
+                                            <td>{{ $video->digital_or_hardcopy }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Language</th>
+                                            <td> &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp; </td>
+                                            <td>{{ $video->language }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>MRP</th>
+                                            <td> &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp; </td>
+                                            <td><del>Rs. {{ $video->price }}</del></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="price_container">
+                                    <span>
+                                     Offer Price
+                                    </span>
+                                    <div>
+                                         Rs. {{ $video->offer_price }}
+                                    </div>
+                                 </div>
+                                <div class="review">
+                                    <i class="far fa-star"></i> <span>4.7 Reviews</span> 
+                                </div>
+                                
+                                <div>
+                                    <label for="out-of-stock" class="out-of-stock">
+                                    @if($video->quantity == 0)
+                                        Out Of Stock
+                                    @else
+                                        In Stock
+                                    @endif
+                                    </label>
+                                </div>
+                                <div class="enroll_btn">
+                                    <a href="javascript:void(0)" class="addtocart btn btn-outline-primary" data-course="{{ $video->id }}">
+                                        Add To Cart <i class="fas fa-angle-right"></i>
+                                    </a>
+                                    <a href="javascript:void(0)" class="cart-remove-from-cart-button save-course-later btn btn-outline-primary" course-id="{{ $video->id }}">
+                                        Save For Later<i class="fas fa-angle-right"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -52,94 +144,10 @@
     <div class="course_container">
 
     <div class="container">
-        <div class="row">
+        <div class="row singleBook">
 
             <div class="col-md-8">
-                <div class="course_content_container">
-                    <div class="course_content_header">
-                        Table Of Content
-                    </div>
-                    <div class="course_module_container">
-
-                        <div class="module_header">
-                            {!! $video->table_of_content !!}
-                        </div>
-                        {{-- <div class="module_list">
-                            <div>
-                                <a href="">
-                                    <div>
-                                        <i class="fas fa-video"></i>Introduction
-                                    </div>
-                                    <div>
-                                        4m    
-                                    </div>
-                                </a>
-                            </div>
-                            <div>
-                                <a href="">
-                                    <div>
-                                        <i class="fas fa-video"></i>Intro to chapter 1
-                                    </div>
-                                    <div>
-                                        4m    
-                                    </div>
-                                </a>
-                            </div>
-                            <div>
-                                <a href="">
-                                    <div>
-                                        <i class="fas fa-video"></i>Intro to chapter 1
-                                    </div>
-                                    <div>
-                                        4m    
-                                    </div>
-                                </a>
-                            </div>
-                            <div>
-                                <a href="">
-                                    <div>
-                                        <i class="fas fa-video"></i>Intro to chapter 1
-                                    </div>
-                                    <div>
-                                        4m    
-                                    </div>
-                                </a>
-                            </div>
-                            <div>
-                                <a href="">
-                                    <div>
-                                        <i class="fas fa-video"></i>Intro to chapter 1
-                                    </div>
-                                    <div>
-                                        4m    
-                                    </div>
-                                </a>
-                            </div>
-                            <div>
-                                <a href="">
-                                    <div>
-                                        <i class="fas fa-video"></i>Intro to chapter 1
-                                    </div>
-                                    <div>
-                                        4m    
-                                    </div>
-                                </a>
-                            </div>
-                            <div>
-                                <a href="">
-                                    <div>
-                                        <i class="fas fa-video"></i>Intro to chapter 1
-                                    </div>
-                                    <div>
-                                        4m    
-                                    </div>
-                                </a>
-                            </div>
-                        </div> --}}
-
-                    </div>
-                </div>
-    
+                
                 <div class="course_content_container">
                     <div class="course_content_header">
                         Course Description
@@ -157,58 +165,11 @@
                 <div class="course_content_container">
 
                     <div class="course_content_header">
-                        Course Details
+                        Table Of Content
                     </div>
-
-                        <div class="course_module_side_container">
-
-                            <div class="author_container">
-                                <div class="image_container"> 
-                                    <img class="img-fluid" src="img/avatar.jpg" alt="">
-                                </div>
-                                <div class="author_box">
-                                    Michael Russell
-                                </div>
-                            </div>
-
-                            <div class="price_container">
-                               <span>
-                                Actual Price
-                               </span>
-                               <div>
-                                $ 69.00
-                               </div>
-                            </div>
-                            <div class="course_features">
-                                <span>Course Features</span>
-                                <ul>
-                                    <li><i class="fas fa-angle-right"></i>Fully Programming</li>
-                                    <li><i class="fas fa-angle-right"></i>Fully Programming</li>
-                                    <li><i class="fas fa-angle-right"></i>Unlimited Videos</li>
-                                    <li><i class="fas fa-angle-right"></i>24x7 Support</li>
-                                </ul>
-                            </div>
-                            <div class="enroll_btn">
-                                <a href="javascript:void(0)" class="addtocart" data-course="{{$video->id}}">
-                                    Add To Cart <i class="fas fa-angle-right"></i>
-                                    <a href="javascript:void(0)" class="cart-remove-from-cart-button save-course-later" course-id="{{ $video->id }}">
-                                        Save For Later<i class="fas fa-angle-right"></i>
-                            </div>
-                           
+                        <div class="course_module_side_container p-4">
+                            {!! $video->description !!}
                         </div>
-
-                    <div class="course_content_header">
-                        Provided By
-                    </div>
-
-                    <a href="">
-                        <div class="course_module_side_container">
-                            <div class="side_container_logo">
-                                <img src="{{ getSiteSetting('logo') ?? '' }}" alt="…"> Ocean Publication
-                            </div>
-                            
-                        </div>
-                    </a>
                     
                 </div>
 
@@ -232,7 +193,7 @@
                                     {{ $item->title }}
                                 </div>
                                 <div class="text_container_para">
-                                    {!! \Illuminate\Support\Str::limit($item->description, 150, '...') !!}
+                                    {!! substr(strip_tags($item->description), 0 , 150) !!}
                                 </div>
                             </div>
                         </a>
@@ -351,9 +312,9 @@
                   courseId: courseId,
                   name: name
                 },
-                // beforeSend: function () {
-                //     $this.prop('disabled', true);
-                // },
+                beforeSend: function () {
+                    $this.prop('disabled', true);
+                },
                 success: function (data) {
                     if (data.status == 'login') {
                     window.location.replace('{{ route('login') }}');
@@ -369,10 +330,31 @@
                     console.log(thrownError);
                 },
                 complete: function () {
-                    // location.reload();
+                    location.reload();
                 }
             });
-        });    
+        });   
+        $(function( $ ){
+            $(".selectCategory").click(function(){
+                var cat = $(this).val();
+                console.log(cat)
+                $.ajax({
+                    type: 'GET',
+                    dataType: 'html',
+                    url: "{{ url('/bookByCat') }}",
+                    data: 'cat_id='+cat,
+                    success: function(response){
+                        console.log(response)
+                        $("#videosData").html(response);
+                    }
+                });
+            }); 
+            $(".selectCategory").click(function(){
+            $(".singleBook").empty();
+            });
+        });
+
+         
     
 </script>
 @endpush

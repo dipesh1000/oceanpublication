@@ -32,7 +32,7 @@
                   <div class="cart-dropdown-single-price">
                     Rs. {{getCoursesByType($cart)->offer_price}} <del>Rs. {{getCoursesByType($cart)->price}}</del>
                   </div>
-                </div>
+                </div>  
               </div>
             @endforeach
           <div
@@ -43,6 +43,9 @@
               <div>Total Price:</div>
               <div>Rs. {{ $total }}</div>
             </div>
+          </div>
+          <div class="text-right p-2">
+            <a href="{{ route('cart') }}" class="btn btn-primary">Go To Cart</a>
           </div>
         </div>
       </div>

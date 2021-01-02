@@ -13,18 +13,20 @@
     <div class="cart-section">
       <div class="cart-savedcourses-content">
         @php
-            $total = 0;
+            $ttlPrice = 0;
+            $totalWithDiscount = 0;
         @endphp
         @if (Cart::instance('default')->count())
         <div class="row">
           <div class="col-lg-9 order-lg-1 order-md-12 order-sm-12 order-2">
             @foreach ($courses as $cartContent)
                     @php
-                        $total += $cartContent->offer_price
+                        $ttlPrice += $cartContent->offer_price;
+                        $totalWithDiscount += $cartContent->price;
                     @endphp
             <div class="cart-saved-courses-list">
               <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                   <div class="cart-course-image">
                     <img src="{{ $cartContent->image }}" />
                   </div>
@@ -32,11 +34,12 @@
                 <div class="col-lg-6">
                   <div class="cart-course-details">
                     <div class="cart-course-title">
-                      <strong>{{ $cartContent->title }}</strong>
+                      <a href="{{ route('book.single', $cartContent->slug) }}">
+                        <strong>{{ $cartContent->title }}</strong>
+                      </a>
                     </div>
                     <div class="cart-course-subtitle">
-                      Lorem, ipsum dolor sit amet consectetur adipisicing
-                      elit.
+                      {!! substr(strip_tags($cartContent->description), 0 , 200) !!}
                     </div>
                   </div>
                 </div>
@@ -47,10 +50,10 @@
                     </button>
                   </div>
                 </div>
-                <div class="col-lg-1">
+                <div class="col-lg-2">
                   <div class="cart-course-price">
-                    <strong>{{ $cartContent->offer_price }}</strong>
-                    <div><s>{{ $cartContent->price }}</s></div>
+                    <strong>Rs. {{ $cartContent->offer_price }}</strong>
+                    <div><s>Rs. {{ $cartContent->price }}</s></div>
                   </div>
                 </div>
               </div>
@@ -59,14 +62,13 @@
           </div>
           <div class="col-lg-3 order-lg-12 order-md-1 order-sm-1 order-1">
             <div class="cart-total-checkout-price-section">
-              Total
-              <p class="cart-total-price">Rs. {{ $total }} /-</p>
-              <p><del>Rs. 12000</del></p>
-              <form action="{{ route('checkout.store')  }}" method="post">
-                {{ csrf_field() }}
-                <input type="hidden" name="ttlPrice" value="{{ $total }}">
-                <button class="cart-checkout-button checkout" data-total="{{ $total }}">Checkout</button>
-              </form>
+              <strong>Total Amount</strong>
+              <p class="cart-total-price">Rs. {{ $ttlPrice }} /-</p>
+              <p><del>Rs.{{ $totalWithDiscount }}</del></p>
+             
+                <button class="cart-checkout-button checkout" data-total="{{ $ttlPrice }}">Checkout</button>
+              
+              {{-- <a href="{{ route('checkout.page')  }}" class="btn cart-checkout-button checkout">Checkout</a> --}}
             </div>
           </div>
         </div>
@@ -98,40 +100,43 @@
     })
    
     // Order Store Request
-    // $(document).on("click", ".checkout", function (e) {
-    //         e.preventDefault();
-    //         var $this = $(this);
-    //         var price = $this.attr('data-total');
-    //         alert($price);
-    //         $.ajaxSetup({
-    //             headers: {
-    //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //             }
-    //         });
+    $(document).on("click", ".checkout", function (e) {
+            e.preventDefault();
+            var $this = $(this);
+            var ttlPrice = $this.attr('data-total');
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
-    //         $.ajax({
-    //             type: "POST",
-    //             url: "{{ route('checkout.store')  }}",
-    //             data: {
-    //                 price: price
-    //             },
-    //             beforeSend: function () {
-    //                 $this.prop('disabled', true);
-    //             },
-    //             success: function (data) {
-    //               if (data.status) {
-    //                 swal(data.status, data.message, "success");
-    //               }
-    //             },
-    //             error: function (xhr, ajaxOptions, thrownError) {
-    //                 console.log(thrownError);
-    //             },
-    //             complete: function () {
-    //                 location.reload();
-    //             }
-    //         });
+            $.ajax({
+                type: "POST",
+                url: "{{ route('checkout.store')  }}",
+                data: {
+                    ttlPrice: ttlPrice
+                },
+                // beforeSend: function () {
+                //     $this.prop('disabled', true);
+                // },
+                success: function (data) {
+                  console.log(data.status)
+                  if (data.status == 'login') {
+                    window.location.replace('{{ route('login') }}');
+                  }
+                  if (data.status) {
+                    swal(data.status, data.message, "success");
+                  }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(thrownError);
+                },
+                // complete: function () {
+                //     location.reload();
+                // }
+            });
 
-    //     });
+        });
         
     //payment with esewa
     // var path="https://uat.esewa.com.np/epay/main";

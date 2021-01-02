@@ -17,8 +17,16 @@ class SentinalMiddleware
     public function handle($request, Closure $next)
     {
         if (!Sentinel::check()) { 
-            return redirect()->route('login')->with('error', 'You must be logged to view the page');
+            if(!$request->ajax()){
+                return redirect()->route('login')->with('error', 'You must be logged to view the page');
+            }
+    
+            return response()->json( [
+                'status'  => 'login',
+                'message' => 'You must be logged to view the page'
+            ], 200 );
         }
+        
         return $next($request);
     }
 }

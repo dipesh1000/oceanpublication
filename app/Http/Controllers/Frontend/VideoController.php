@@ -40,6 +40,11 @@ class VideoController extends Controller
             ->where('status','Active')
             ->take(3)
             ->get();
-        return view('frontend.video.single', compact('video', 'similarVideos'));
+        $current_cat = $video->category()->first();
+        $parent_cat = $current_cat->parent()->first();
+        $child_cat = Category::with('childs.childs')
+            ->where('id', $parent_cat->id)
+            ->first();
+        return view('frontend.video.single', compact('video', 'similarVideos', 'child_cat'));
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\UserDashboard;
 
 use App\Http\Controllers\Controller;
+use App\Model\MasterOrder;
 use App\Model\Order;
 use App\Repositories\RepoCourse\CourseRepository;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -21,22 +22,25 @@ class CourseController extends Controller
     }
     public function getAllCourses()
     {
-        $user = Sentinel::getUser();
-        $purchaseCourse = Order::where('user_id', $user->id)->get();
         $courses = [];
-        foreach ($purchaseCourse as $courseItem){
-            $ss = $courseItem->purchaseble_type;
-            if($ss == 'App\Model\Package'){
-                $courses[] = $this->course->getPackageById($courseItem->purchaseble_id);
-            }
-            if($ss == 'App\Model\Book'){
-                $courses[] = $this->course->getBookById($courseItem->purchaseble_id);
-            }
-            if($ss == 'App\Model\Video'){
-                $courses[] = $this->course->getVideoById($courseItem->purchaseble_id);
-            }
-            
-        }    
+        $user = Sentinel::getUser();
+        $masterOrder = MasterOrder::where('user_id', $user->id)->get();
+        foreach ($masterOrder as $orders){
+            $purchaseCourse = Order::where('master_order_id', $orders->id)->get();
+            foreach ($purchaseCourse as $courseItem){
+                $ss = $courseItem->purchaseble_type;
+                if($ss == 'App\Model\Package'){
+                    $courses[] = $this->course->getPackageById($courseItem->purchaseble_id);
+                }
+                if($ss == 'App\Model\Book'){
+                    $courses[] = $this->course->getBookById($courseItem->purchaseble_id);
+                }
+                if($ss == 'App\Model\Video'){
+                    $courses[] = $this->course->getVideoById($courseItem->purchaseble_id);
+                }
+                
+            }    
+        }
         $collectionCourse = collect($courses);
         $coursesList = $this->paginate($collectionCourse);    
         return view('userdashboard.purchaseCourse.index', compact('coursesList'));
@@ -50,7 +54,10 @@ class CourseController extends Controller
     public function getSingleBook($id)
     {
         $book = $this->course->getBookById($id);
-        return view('userdashboard.purchaseCourse.bookSingle', compact('book'));
+        $user = Sentinel::getUser();
+        $book->user_id = $user->id; 
+        $review = $book->courseItem()->first();
+        return view('userdashboard.purchaseCourse.bookSingle', compact('book', 'review'));
     }
     public function getSinglePackage($id)
     {

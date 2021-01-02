@@ -6,6 +6,8 @@
 <link href="{{ asset('cork/plugins/sweetalerts/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('cork/plugins/sweetalerts/sweetalert.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('cork/assets/css/components/custom-sweetalert.css') }}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="{{ asset('assets/dflip/css/dflip.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/dflip/css/themify-icons.css') }}">
 
 @endpush
 
@@ -38,18 +40,19 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $book->title }}</td>
-                                <td>{{ $book->category?$book->category->title:"" }}</td>
+                                <td>{{ $book->category?$book->category->title:"" }}
+                                    @if($book->price == 0) <span class="badge badge-info">Library</span> @endif
+                                </td>
                                 <td class="text-left">
                                     <span><img src="{{ asset($book->image) }}" width="50" ></span>
                                 </td>
                                 <td> @if($book->status == "Active" ) <span class="badge badge-success">Active</span> @else <span class="badge badge-danger">Inactive</span> @endif</td>
                                 <td> @if($book->digital_or_hardcopy == "Both" ) <span class="badge badge-success">Digital & Hardcopy</span> @else <span class="badge badge-primary">{{ $book->digital_or_hardcopy }}</span> @endif</td>
                                 <td>
-
-                                    <a target="_blank" href="{{ route('admin.book.show', $book->id) }}" title="Edit" class="badge badge-primary"> <i data-feather="eye"></i></a>
+                                    <div class="_df_button badge badge-primary" source="{{ $book->book }}"> <i data-feather="eye"></i></div>
+                                    {{-- <a target="_blank" href="{{ route('admin.book.show', $book->id) }}" title="Edit" class="badge badge-primary"> <i data-feather="eye"></i></a> --}}
                                     <a href="{{ route('admin.book.edit', $book->id) }}" title="Edit" class="badge badge-success"> <i data-feather="edit"></i></a>
                                     <a href="{{ route('admin.book.delete', $book->id) }}" title="Delete" class="badge badge-dark warning confirm"><i data-feather="archive"></i></a>
-
                                 </td>
                             </tr>
                                 @endforeach
@@ -80,6 +83,8 @@
 <script src="{{ asset('cork/plugins/table/datatable/datatables.js') }}"></script>
 <script src="{{ asset('cork/plugins/sweetalerts/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('cork/plugins/sweetalerts/custom-sweetalert.js') }}"></script>
+<script src="{{ asset('assets/dflip/js/dflip.min.js') }}"></script>
+<script src="{{ asset('assets/js/app.js') }}" defer></script>
 <script>
     $('#zero-config').DataTable({
         "oLanguage": {

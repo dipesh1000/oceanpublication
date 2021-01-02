@@ -24,6 +24,11 @@
                             <i class="fas fa-envelope"></i>
                             <a href="mailto:{{ getSiteSetting('primary_email') ?? '' }}">{{ getSiteSetting('primary_email') ?? '' }}</a>
                         </li>
+                        @if ($user = Sentinel::check())
+                        <li class="p-1 ml-4">
+                            <a href="{{ route('userDashboard') }}"><i class="fa fa-user-circle"></i>{{ $user->first_name }}</a>
+                        </li>
+                        @endif
                     </ul>
                     <ul class="second-navbar-wrapper">
                         <li>
@@ -50,15 +55,11 @@
                                 Distributor
                             </a>
                         </li>
+                        
                         <li>
-                            <a href="{{ route('categoryType') }}">
-                                Product
-                            </a>
-                        </li>
-                            <li>
-                            <a href="{{ route('getContact') }}">
-                                Contact
-                            </a>
+                        <a href="{{ route('getContact') }}">
+                            Contact
+                        </a>
                         </li>
                         <li>
                             <a href="" data-toggle="modal" data-target="#signin">

@@ -3,44 +3,93 @@
 namespace App\Http\Controllers\UserDashboard;
 
 use App\Http\Controllers\Controller;
+use App\Model\MasterOrder;
 use App\Model\Order;
+use Brian2694\Toastr\Facades\Toastr;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class EsewaController extends Controller
 {
-    public function sucess(Request $request)
+    public function success(Request $request)
     {
         if($request->oid && $request->amt &&$request->refId)
         {
-            // $order = Order::where('invoice_no',$request->oid)->first();
-            // if($order){
             $url = "https://uat.esewa.com.np/epay/transrec";
             $data =[
-            'amt'=> $request->totalPrice,
+            'amt'=> $request->amt,
             'rid'=> $request->refId,
-            'pid'=> $request->pid,
+            'pid'=> $request->oid,
             'scd'=> 'epay_payment'
-                 ];
-            // }
+            ];
+            
+            $curl = curl_init($url);
+            curl_setopt($curl, CURLOPT_POST, true);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            $response = curl_exec($curl);
+            curl_close($curl);
+            $response_code = $this->get_response('response_code',$response);
+            if(trim($response_code) =='success')
+            {
+            DB::beginTransaction();
+            $user = Sentinel::getUser();
+            $carts = Cart::content();
+            $count = count($carts);
+            $courses = [];
+            try {
+                $masterOrder = new MasterOrder();
+                $masterOrder->user_id = $user->id;
+                $masterOrder->invoice_no = $request->oid;
+                $masterOrder->status = MasterOrder::STATUS_ACTIVE;
+                $masterOrder->grandTotal = $request->amt;
+                $masterOrder->payment_method = 'Esewa';
+                $masterOrder->save();
+            } catch (\Throwable $e) {
+                DB::rollback();
+                return redirect()->back()->with('errors', 'Error While Checkout');
+            }
+            if($count > 0) {
+                try {
+                    foreach ($carts as $cart) { 
+                        $order = new Order();
+                        $order->purchaseble_id = $cart->id;
+                        $order->master_order_id = $masterOrder->id;
+                        $order->purchaseble_type = get_class(getCoursesByType($cart));
+                        $order->order_date = Carbon::now()->toDateTimeString();
+                        $order->price = getCoursesByType($cart)->price;
+                        $checkout = $order->save();
+                        $courses[] = $order; 
+                            if($checkout == true){
+                                Cart::destroy($cart->rowId);
+                            }
+                            // return response()->json( [
+                                //     'status'  => 'success',
+                                //     'message' => 'Course Checkout Successfully.'
+                                // ], 200 );
+                        }  
 
-        $curl = curl_init($url);
-        curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        $response = curl_exec($curl);
-        curl_close($curl);
-        $response_code = $this->get_response('response_code',$response);
-        if(trim($response_code) =='Success')
-        {
-            // $order->status= 1;
-            // $order->save();
-            return redirect()->route('userdashboard.order.response')->with('success_message', 'Trasaction completed.');
-        }
+                        DB::commit();
+                            Toastr::success('Success', 'Payment Course Competed');
+                            return redirect('/esewa/response')->with('success_message', 'Transaction Completed');
+                        
+                    }
+                    catch (\Throwable $e) {
+                        DB::rollback();
+                        return redirect()->back()->with('errors', 'Error While Checkout');
+                    }
+                    
+                }   
+            
+            }
         }
     }
     public function failure()
     {
-        return redirect()->route('userdashboard.order.response')->with('failure_message', 'Failed.');
+        return redirect('/esewa/response')->with('failure_message', 'Failed.');
     }
     //extract value from response code of verification of payment
     public function get_response($node, $xml)
@@ -56,6 +105,6 @@ class EsewaController extends Controller
     }
     public function response()
     {
-        return view('response');
+        return view('userdashboard.order.response');
     }
 }

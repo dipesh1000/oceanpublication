@@ -76,12 +76,14 @@ Route::group([
     Route::get('/profile', 'ProfileController@userProfile')->name('userProfile');
     Route::get('/profile/edit/{id}', 'ProfileController@userProfileEdit')->name('userProfileEdit');
     Route::patch('/profile/edit/{id}', 'ProfileController@updateProfile')->name('updateProfile');
+    Route::get('/checkout', 'OrderController@getCheckout')->name('checkout.page');
     Route::post('/checkout', 'OrderController@store')->name('checkout.store');
     Route::any('/esewa/success', 'EsewaController@success');
     Route::any('/esewa/failure', 'EsewaController@failure');
-    Route::any('/esewa/response', 'EsewaController@response')->name('payment.response');
+    Route::any('/esewa/response', 'EsewaController@response');
     //save course for later
     Route::get('/save-course-later', 'SavedCourseController@getSavedCourse')->name('saveCourseLater');
+    Route::get('/save-course-later/delete/{id}', 'SavedCourseController@destroy')->name('saveCourseLater.delete');
     Route::get('/courses', 'CourseController@getAllCourses')->name('purchasedCourse');
     Route::get('/courses/video/{id}', 'CourseController@getSingleVideo')->name('purchasedCourseVideo');
     Route::get('/courses/book/{id}', 'CourseController@getSingleBook')->name('purchasedCourseBook');

@@ -9,4 +9,10 @@ Interface CourseInterface {
 
     public function getPackageById($id);
 
+    // public function getBookModelById($id);
+
+    // public function getVideoModelById($id);
+
+    // public function getPackageModelById($id);
+
 }

@@ -20,7 +20,7 @@
             </select>
         </div>
     </div>
-    <div class="col-md-6 mx-auto">
+    {{-- <div class="col-md-6 mx-auto">
         <div class="form-group">
             <p>Category Image</p>
             <div class="custom-file-container" data-upload-id="myFirstImage">
@@ -33,31 +33,29 @@
                 <div class="custom-file-container__image-preview"></div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 
 <div class="row">
     <div class="col-md-6">
-        <div class="form-group">
+        {{-- <div class="form-group">
             <p>Icon</p>
             <label for="t-text" class="sr-only">Category Icon</label>
             {{ Form::text('icon',old('icon')??$editCategory->icon??'',['class' => 'form-control','placeholder'=> 'Category Icon...']) }}
-            {{-- <small class="text-danger alert-message">{{ $errors->first('icon') }}</small> --}}
-        </div>
+        </div> --}}
     </div>
     <div class="col-md-6">
         <div class="form-group">
             <p> Status</p>
             <label class="switch s-icons s-outline  s-outline-danger  mb-4 mr-2">
-                {{ Form::checkbox('status',null, (!empty($editCategory) ? $editCategory->status=="Active"? true : false:false)) }}
+                {{ Form::checkbox('status',null, (!empty($editCategory) ? $editCategory->status=="Active"? true : false:true    )) }}
                 <span class="slider"></span>
             </label>
         </div>
     </div>
 </div>
 
-<div class="form-group">
+{{-- <div class="form-group">
     <p> Description</p>
     {{ Form::textarea('description', old('description')??$editCategory->description??'') }}
-    {{-- <small class="text-danger alert-message">{{ $errors->first('description') }}</small> --}}
-</div>
+</div> --}}

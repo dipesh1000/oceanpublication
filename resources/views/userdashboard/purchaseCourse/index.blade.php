@@ -4,7 +4,21 @@
     <div class="row no-gutters">
         @include('userdashboard.partials.side-nav')
         <div class="col-md-8 col-lg-9">
-            @include('userdashboard.partials.breadcum')
+            <div class="allcourses_content_bar">
+                <div class="d_breadcrumb">
+                  <ul>
+                    <li>
+                      <a href=""> Home </a>
+                    </li>
+                    <li>/</li>
+                    <li class="active">
+                      <a href="all-courses.html">
+                        <span>All Courses</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             <div class="course_container">  
                 <div class="row">
                     <div class="col-lg-12">

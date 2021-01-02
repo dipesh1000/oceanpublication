@@ -1,5 +1,40 @@
 @extends('frontend.layouts.app')
 @section('content')
+<style>
+    
+    .aside_drop {
+        border-bottom: 1px solid #0487ce;
+    }
+    .aside_drop:hover {
+        background: linear-gradient(45deg, #c3cbd6, #ffffff)!important;
+        color: #fff;
+        display: block;
+    }
+    .aside_drop li {
+        padding-left: 25px;
+    }
+    .aside_drop li:hover {
+        color: #fff;
+    }
+    .side-drop-list-item {
+        border-bottom: 1px solid #0487ce;
+        width: 89%;
+        margin-left: 22px;
+        padding: .8em;
+        background: #f4f5f7;
+    }
+    .side-drop-list-item:hover {
+        background: linear-gradient(45deg, #c3cbd6, #ffffff)!important;
+        color: #fff;
+        display: block;
+    }
+    #product_page aside .aside_list {
+        padding: 0 4px;
+    }
+    .active {
+        cursor: pointer!important;
+    }
+</style>
 <div id="product_page">
     <div class="container-fluid book_filter">
        <div class="filter_title" data-toggle="collapse" data-target="#filter_list">
@@ -35,7 +70,7 @@
 <div class="container-fluid">
    <div class="row">
 
-       <div class="col-2 asider">
+       <div class="col-3 asider">
            <aside>
                <div class="aside_header">
                    Categories
@@ -50,16 +85,19 @@
                         @foreach ($catItem->childs as $child_cats)
                             <div class="collapse" id="drop{{ $catItem->id }}"> 
                                 <div class="aside_list" data-toggle="collapse" data-target="#drop{{ $child_cats->id }}">
-                                    <li id="cat{{$child_cats->id}}" class="selectCategory" value="{{$child_cats->id}}">
+                                    <li id="cat{{$child_cats->id}}" class="selectCategory side-drop-list-item {{ ($child_cats->childs) ? 'active' : '' }}" value="{{$child_cats->id}}">
                                         {{ $child_cats->title }}
                                     </li> 
+                                    @if($child_cats->childs)
+                                        <span>&blacktriangledown;</span>
+                                    @endif
                                 </div>
                             </div>
                             @if($child_cats->childs)
                                 @foreach ($child_cats->childs as $child_cat)
                                 <div class="collapse" id="drop{{ $child_cats->id }}"> 
                                     <div class="aside_list">
-                                        <li id="cat{{$catItem->id}}" class="selectCategory" value="{{$child_cat->id}}">
+                                        <li id="cat{{$catItem->id}}" class="selectCategory side-drop-list-item" value="{{$child_cat->id}}">
                                             {{ $child_cat->title }}
                                         </li> 
                                     </div>
@@ -73,7 +111,7 @@
            </aside>
        </div>
 
-       <div class="col-12  col-md-10">
+       <div class="col-12  col-md-9">
            <main>
                 <div class="bread_container">
                     <ul class="bread">

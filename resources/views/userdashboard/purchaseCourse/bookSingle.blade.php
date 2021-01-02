@@ -63,40 +63,87 @@
             </div>
             <div class="col-md-4">
                 <div class="course_content_container">
-
                     <div class="course_content_header">
                         Feed Back
                     </div>
                         <div class="course_module_side_container">
-                            @if(session()->has('success'))
-                                <div class="alert alert-success">
-                                    {{ session()->get('success') }}
+                        @if($review == null)
+                        <p class="text-center font-weight-bold pt-2">Please give us your feedback</p>
+                        <form action="{{ route('feedback.store') }}" method="post">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="courseId" value="{{ $book->id }}">
+                            <input type="hidden" name="name" value="{{ $book->type }}">
+                            <div class="rating"> 
+                                <input type="radio" name="rating" value="5" id="5">
+                                <label for="5">☆</label> 
+                                <input type="radio" name="rating" value="4" id="4">
+                                <label for="4">☆</label>
+                                <input type="radio" name="rating" value="3" id="3">
+                                <label for="3">☆</label> 
+                                <input type="radio" name="rating" value="2" id="2">
+                                <label for="2">☆</label> 
+                                <input type="radio" name="rating" value="1" id="1">
+                                <label for="1">☆</label>
+                            </div>
+                            <div class="p-2">
+                                <textarea name="review" id="review" class="form-control" required></textarea>
+                            </div>
+                            <div class="p-2 text-right">
+                                <button type="submit" value="submit" class="btn-sm btn-outline-primary">Submit</button>
+                            </div>
+                        </form>
+                        @else 
+                        <div class="row">
+                            <div class="col-md-9">
+                                <p class="text-center font-weight-semi-bold pt-2">
+                                    {{ $review->star }}☆ {{ $review->review }}
+                                </p>
+                            </div>
+                            <div class="col-md-3 align-self-center">
+                                <button type="button" class="btn-sm btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
+                                    Edit
+                                </button>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Edit Review</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
-                            @endif
-                            <p class="text-center font-weight-bold pt-2">Please give us your feedback</p>
-                            <form action="{{ route('feedback.store') }}" method="post">
-                                {{ csrf_field() }}
-                                <input type="hidden" name="courseId" value="{{ $book->id }}">
-                                <input type="hidden" name="name" value="{{ $book->type }}">
-                                <div class="rating"> 
-                                    <input type="radio" name="rating" value="5" id="5">
-                                    <label for="5">☆</label> 
-                                    <input type="radio" name="rating" value="4" id="4">
-                                    <label for="4">☆</label>
-                                    <input type="radio" name="rating" value="3" id="3">
-                                    <label for="3">☆</label> 
-                                    <input type="radio" name="rating" value="2" id="2">
-                                    <label for="2">☆</label> 
-                                    <input type="radio" name="rating" value="1" id="1">
-                                    <label for="1">☆</label>
+                                <div class="modal-body">
+                                    <form action="" method="post">
+                                        {{-- {{ csrf_field() }}
+                                        @method('patch') --}}
+                                        <input type="hidden" name="courseId" value="{{ $book->id }}">
+                                        <input type="hidden" name="name" value="{{ $book->type }}">
+                                        <div class="rating"> 
+                                            <input type="radio" name="rating" value="5" id="5">
+                                            <label for="5">☆</label> 
+                                            <input type="radio" name="rating" value="4" id="4">
+                                            <label for="4">☆</label>
+                                            <input type="radio" name="rating" value="3" id="3">
+                                            <label for="3">☆</label> 
+                                            <input type="radio" name="rating" value="2" id="2">
+                                            <label for="2">☆</label> 
+                                            <input type="radio" name="rating" value="1" id="1">
+                                            <label for="1">☆</label>
+                                        </div>
+                                        <div class="p-2">
+                                            <textarea name="review" id="review" value="{{ $review->review }}" class="form-control" required>{{ $review->review }}</textarea>
+                                        </div>
+                                        <div class="p-2 text-right">
+                                            <button type="submit" value="submit" class="btn-sm btn-outline-primary">Submit</button>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div class="p-2">
-                                    <textarea name="review" id="review" class="form-control" required></textarea>
                                 </div>
-                                <div class="p-2 text-right">
-                                    <button type="submit" value="submit" class="btn-sm btn-outline-primary">Submit</button>
-                                </div>
-                            </form>
+                            </div>
+                            </div>
+                        @endif
                         </div>
 
                     <div class="course_content_header">

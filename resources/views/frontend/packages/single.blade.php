@@ -151,86 +151,48 @@
                         Provided By
                     </div>
 
-                    <a href="">
+                    {{-- <a href="">
                         <div class="course_module_side_container">
                             <div class="side_container_logo">
                                 <img src="{{ getSiteSetting('logo') ?? '' }}" alt="…"> Ocean Publication
                             </div>
                             
                         </div>
-                    </a>
+                    </a> --}}
                     
                 </div>
 
             </div>
 
         </div>
-
+        @if(count($similarPackages) > 0)
         <div class="similar_content_header">
             Similar Content
         </div>
 
         <div class="row">
-            
-            <div class="col-md-4">
-                <div class="similar_content_container">
-                    <a href="">
-                        <div class="image_container">
-                            <img class="img-fluid" src="img/pic2.jpg" alt="">
-                        </div>
-                        <div class="text_container">
-                            <div class="text_container_header">
-                                Intro to Science
+            @foreach ($similarPackages as $similarPackage)
+                <div class="col-md-4">
+                    <div class="similar_content_container">
+                        <a href="">
+                            <div class="image_container">
+                                <img class="img-fluid" src="{{ $similarPackage->image }}" alt="{{$similarPackage->title}}">
                             </div>
-                            <div class="text_container_para">
-                                Lorem ipsum dolor sit amet consectetur adipisicing
-                                 elit. Libero unde esse velit fugiat vero nemo ...
+                            <div class="text_container">
+                                <div class="text_container_header">
+                                    {{$similarPackage->title}}
+                                </div>
+                                <div class="text_container_para">
+                                    {!! substr(strip_tags($similarPackage->description), 0 , 150) !!}
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                   
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="similar_content_container">
-                    <a href="">
-                        <div class="image_container">
-                            <img src="img/pic2.jpg" alt="">
-                        </div>
-                        <div class="text_container">
-                            <div class="text_container_header">
-                                Intro to Science
-                            </div>
-                            <div class="text_container_para">
-                                Lorem ipsum dolor sit amet consectetur adipisicing
-                                 elit. Libero unde esse velit fugiat vero nemo ...
-                            </div>
-                        </div>
-                    </a>
-                   
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="similar_content_container">
-                    <a href="">
-                        <div class="image_container">
-                            <img src="img/pic2.jpg" alt="">
-                        </div>
-                        <div class="text_container">
-                            <div class="text_container_header">
-                                Intro to Science
-                            </div>
-                            <div class="text_container_para">
-                                Lorem ipsum dolor sit amet consectetur adipisicing
-                                 elit. Libero unde esse velit fugiat vero nemo ...
-                            </div>
-                        </div>
-                    </a>
-                   
-                </div>
-            </div>
-          
+                        </a>
+                    
+                    </div>
+                </div> 
+            @endforeach
         </div>
+        @endif
     </div>
 
 

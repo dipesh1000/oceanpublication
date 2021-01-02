@@ -166,6 +166,9 @@ return [
          * Package Service Providers...
          */
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
+        Brian2694\Toastr\ToastrServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -235,6 +238,9 @@ return [
         'Sentinel'   => Cartalyst\Sentinel\Laravel\Facades\Sentinel::class,
         'Image' => 'Intervention\Image\Facades\Image',
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
+        'Toastr'  => Brian2694\Toastr\Facades\Toastr::class,
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class, 
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
 
     ],
 

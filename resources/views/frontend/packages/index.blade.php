@@ -15,7 +15,8 @@
                                 <img class="img-fluid" src="{{ $package->image }}" alt="{{ $package->title }}">
                                 </a>  
                                 <div class="course_price">
-                                    {{ $package->offer_price }}
+                                    <div>Rs.{{ $package->offer_price }}</div>
+                                    <del>Rs.{{ $package->price }}</del>
                                 </div>
                             </div>
                             <div class="course_title">

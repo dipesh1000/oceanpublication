@@ -7,8 +7,11 @@
             </div>
             <div class="course-element-details">
                 <div class="course-name-divider"></div>
+                <div class="course-element-title">
+                    {{ $course->title }}
+                </div>
                 {{-- <div class="course-element-subtitle">
-                    {!! \Illuminate\Support\Str::limit($course->description, 150, '...') !!}
+                    {!! substr(strip_tags($course->description), 0 , 40) !!}
                 </div> --}}
                 <div class="d-flex justify-content-between align-items-baseline">
                 {{-- <div class="course-element-price">{{ $course->offer_price }}</div> --}}

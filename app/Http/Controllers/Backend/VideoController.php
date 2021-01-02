@@ -20,7 +20,7 @@ class VideoController extends Controller
      */
     public function index()
     {
-        $videos = Video::all();
+        $videos = Video::orderBy('id', 'desc')->get();
         return view('admin.video.index', compact('videos'));
     }
 
@@ -250,14 +250,23 @@ class VideoController extends Controller
      */
     public function destroy($id)
     {
+
         $video = Video::find($id);
-        if($video){
-            imageDelete($video);
-            $video->delete();
-            return redirect()->back()->with('success', 'Video Successfully Deleted.');
+
+        if($video->orderItem->isEmpty()){
+            if($video){
+                imageDelete($video);
+                $video->delete();
+                return redirect()->back()->with('success', 'Video Successfully Deleted.');
+            }else{
+                return redirect()->back()->with('error', 'Video Not Found!!! Refresh your page.');
+            }
         }else{
-            return redirect()->back()->with('errors', 'Video Not Found!!! Refresh your page.');
+            return redirect()->back()->with('error', 'Some users purchase this Video!! you are unable to delete this.');
         }
+
+
+        
     }
 
 

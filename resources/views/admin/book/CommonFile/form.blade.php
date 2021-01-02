@@ -35,7 +35,7 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <p>Book Price</p>
+                    <p>Book Price <span class="bg-dark">For Librart Type 0 Compulsary</span></p>
                     <label for="t-text" class="sr-only">Book Price</label>
                     {{ Form::number('price',old('price')??$book->price??'',['class' => 'form-control','placeholder'=> 'Book Price...']) }}
                     <small class="text-danger alert-message">{{ $errors->first('price') }}</small>
@@ -43,7 +43,7 @@
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <p>Offer Price</p>
+                    <p>Offer Price <span class="bg-dark">For Librart Type 0 Compulsary</span></p>
                     <label for="t-text" class="sr-only">Offer Price</label>
                     {{ Form::number('offer_price',old('offer_price')??$book->offer_price??'',['class' => 'form-control','placeholder'=> 'Offer Price...']) }}
                     <small class="text-danger alert-message">{{ $errors->first('offer_price') }}</small>
