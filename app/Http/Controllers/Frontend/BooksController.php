@@ -15,12 +15,21 @@ class BooksController extends Controller
 
     public function index()
     {
-        $books = $this->book->getAllBooks();
+        try {
+            $books = $this->book->getAllBooks();
 
-        $cats = $this->book->getAllBooksCategory();
+            $cats = $this->book->getAllBooksCategory();
+            
+            return view('frontend.book.index',compact('cats', 'books'))
+                ->with('i', (request()->input('page', 1) - 1) * 12);
+        } 
+        catch (\Illuminate\Database\QueryException $ex) {
+            return $this->error($ex->getMessage());
+        }
+        catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
         
-        return view('frontend.book.index',compact('cats', 'books'))
-            ->with('i', (request()->input('page', 1) - 1) * 12);
     }
     public function getBooksBySlug($slug)
     {

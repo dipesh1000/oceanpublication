@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BookResource;
+use App\Http\Resources\Category\CategoryResource;
 use App\Repositories\BookRepo\BookRepository;
 use App\Traits\ResponseAPI;
 use Illuminate\Http\Request;
@@ -17,12 +19,52 @@ class BooksController extends Controller
     }
     public function index()
     {
-        $books = $this->book->getAllBooks();
+        // try {
+            $books = $this->book->getAllBooks();
 
-        $cats = $this->book->getAllBooksCategory();
-        
-        // return $this->success("All Books", [$books, $cats]);
-        return [$this->success("All Books", $books), $this->success('Books Categories', $cats)];
-        
+            $cats = $this->book->getAllBooksCategory();
+            $context_cat = [];
+            foreach($cats as $cat){
+                $data = CategoryResource::collection($cat);
+                $context_cat = array_merge($context_cat,  $data->toArray(0) );
+            }
+            $context = [
+                'books' => BookResource::collection($books),
+                'categories' => $context_cat 
+            ];
+            return $this->success("All Books", $context); 
+
+
+        // } catch (\Illuminate\Database\QueryException $ex) {
+        //     return $this->error($ex->getMessage());
+        // }
+        // catch (\Exception $e) {
+        //     return $this->error($e->getMessage());
+        // }
+    }
+
+    public function getBookBySlug($slug)
+    {
+        try {
+            $book = $this->book->getBookBySlug($slug);
+
+            // $courseReview = $book->courseItem;
+            // return $courseReview;
+
+            $similarBooks = $this->book->getSimilarBooks($slug);
+
+            $child_cat = $this->book->getRelatedCategories($slug);
+
+            return [
+                $this->success("Book", $book),
+                $this->success("similarBooks", $similarBooks),
+                $this->success("childCategories", $child_cat)
+            ];
+        } catch (\Illuminate\Database\QueryException $ex) {
+            return $this->error($ex->getMessage());
+        }
+        catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
     }
 }

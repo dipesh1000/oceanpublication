@@ -1,23 +1,23 @@
 <?php 
 
-namespace App\Repositories\BookRepo;
+namespace App\Repositories\VideoRepo;
 
-use App\Http\Resources\BookResource;
-use App\Model\Book;
 use App\Model\Category;
+use App\Model\Video;
 
-class  BookRepository implements BookInterface {
+class  VideoRepository implements VideoInterface {
 
-    public function getAllBooks()
+    public function getAllVideos()
     {
-        $books = Book::orderBy('ID','DESC')
+        $videos = Video::orderBy('ID','DESC')
         ->where('status','Active')
         ->where('offer_price','>',0)
         ->paginate(12);
 
-        return $books;
+        return $videos;
+    
     }
-    public function getAllBooksCategory()
+    public function getAllVideosCategory()
     {
         $categories = Category::orderBy('ID', 'DESC')
         ->where('status', 'Active')
@@ -31,22 +31,20 @@ class  BookRepository implements BookInterface {
             ->get();
         }
         return $cats;
-            
-        
     }
 
-    public function getBookBySlug($slug)
+    public function getVideoBySlug($slug)
     {
-        $book = Book::where('slug', $slug)->first();
-        $book->type = 'book';
+        $video = Video::where('slug', $slug)->first();
+        $video->type = 'video';
         
-        return $book;
+        return $video;
     }
 
     public function getRelatedCategories($slug)
     {
-        $book = Book::where('slug', $slug)->first();
-        $current_cat = $book->category()->first();
+        $video = Video::where('slug', $slug)->first();
+        $current_cat = $video->category()->first();
         $parent_cat = $current_cat->parent()->first();
         $child_cat = Category::with('childs.childs')
             ->where('id', $parent_cat->id)
@@ -55,19 +53,18 @@ class  BookRepository implements BookInterface {
         return $child_cat;
     }
 
-    public function getSimilarBooks($slug)
+    public function getSimilarVideos($slug)
     {
-        $book = Book::where('slug', $slug)->first();
+        $video = Video::where('slug', $slug)->first();
 
-        $similarBooks = Book::orderBy('ID','DESC')
-        ->where('category_id', $book->category_id)
-        ->where('id', '!=' , $book->id)
+        $similarVideos = Video::orderBy('ID','DESC')
+        ->where('category_id', $video->category_id)
+        ->where('id', '!=' , $video->id)
         ->where('status','Active')
         ->take(3)
         ->get();
 
-        return $similarBooks;
-
+        return $similarVideos;
     }
 
 
