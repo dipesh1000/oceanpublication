@@ -25,15 +25,26 @@ Route::group(
 
         Route::get('/videos', 'VideoController@index');
         Route::get('/video/{slug}', 'VideoController@getVideoBySlug');
-
+        
         Route::get('/packages', 'PackageController@index');
         Route::get('/package/{slug}', 'PackageController@getPackageBySlug');
+        Route::get('all-course','CourseController@getAllCourses')->middleware('auth:api');
+        Route::post('/save-course','CourseController@savedCourse')->middleware('auth:api');
+        Route::get('student-profile','StudentController@studentProfile');
+
     });
 
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// //saved_course
+// Route::get('/saved-course','');
+// //all_course
+
+// //student_profile
+
 
 
 

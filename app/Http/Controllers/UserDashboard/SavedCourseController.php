@@ -14,7 +14,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 class SavedCourseController extends Controller
 {
     public $course;
-    public function __Construct(CourseRepository $course)
+    public function __construct(CourseRepository $course)
     {
         $this->course = $course;
     }
@@ -39,7 +39,9 @@ class SavedCourseController extends Controller
                     catch (\Exception $e) {
                         return redirect()->back()->with('errors', 'Error While Saving Course');
                     }
-            } else {
+            } 
+            else 
+            {
                 return response()->json( [
                     'status'  => 'exists',
                     'message' => 'Course Already Exists!!!'
@@ -59,7 +61,8 @@ class SavedCourseController extends Controller
         $user = Sentinel::getUser();
         $savedCourse = SavedCourse::where('user_id', $user->id)->get();
         $courses = [];
-        if (count($savedCourse) > 0) {
+        if (count($savedCourse) > 0) 
+        {
             foreach ($savedCourse as $courseItem){
                 $ss = $courseItem->saveable_type;
                 if($ss == 'App\Model\Book'){
@@ -69,7 +72,8 @@ class SavedCourseController extends Controller
                     // dd($courseItem->saveable_id);
                     $courses[] = $this->course->getVideoById($courseItem->saveable_id);
                 }
-                if($ss == 'App\Model\Package'){
+                if($ss == 'App\Model\Package')
+                {
                     $courses[] = $this->course->getPackageById($courseItem->saveable_id);
                 }
             }

@@ -257,18 +257,22 @@ function getCoursesByType($cart)
 function getSavedCourseByType($request) 
 {
     $interface = new CourseRepository();
-    if($request['name'] == "book"){
-        $book = $interface->getBookById($request['courseId']);
+    if($request['name'] == "book")
+    {
+        
+        $book = $interface->getClass($request['name']);
+        
         return $book;
     }
 
     if($request['name'] == "video"){
-        $video = $interface->getVideoById($request['courseId']);
+        $video = $interface->getClass($request['name']);
         return $video;
     }
 
-    if($request['name'] == "package"){
-        $package = $interface->getPackageById($request['courseId']);
+    if($request['name'] == "package")
+    {
+        $package = $interface->getClass($request['name']);
         return $package;
 
     }

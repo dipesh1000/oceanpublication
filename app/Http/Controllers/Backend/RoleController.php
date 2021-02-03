@@ -54,7 +54,8 @@ class RoleController extends Controller
             ]);
             return redirect()->back()->with('success', 'Role Successfully Updated.');
         }
-        catch (\Exception $e) {
+        catch (\Exception $e) 
+        {
             return redirect()->back()->with('error', 'Error while Updating Role');
         }
 

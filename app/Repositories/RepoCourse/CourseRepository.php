@@ -14,6 +14,23 @@ class CourseRepository implements CourseInterface
         $book->type = 'book';
         return $book;
     }
+
+    public function getClass($type)
+    {
+        if($type == "book")
+        {
+            return (new Book())->getMorphClass();
+        }
+        else if($type == "video")
+        {
+            return (new Video())->getMorphClass();
+        }
+        else if($type == "package")
+        {
+            return (new Package())->getMorphClass();
+        }
+
+    }
     public function getVideoById($id)
     {
         $video = Video::where('id', $id)->first();
