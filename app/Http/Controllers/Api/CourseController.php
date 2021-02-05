@@ -104,6 +104,15 @@ class CourseController extends Controller
         }
     }
 
+    public function delete(Request $request)
+    {
+        $delete = SavedCourse::findOrFail($request->id)->delete();
+        if($delete)
+        {
+            return $this->success("Data Retrive Successfully",200); 
+        }
+        return $this->error("Something Went Wrong");
+    }
     
     public function paginate($items, $perPage = 12, $page = null, $options = [])
     {

@@ -28,10 +28,16 @@ Route::group(
         
         Route::get('/packages', 'PackageController@index');
         Route::get('/package/{slug}', 'PackageController@getPackageBySlug');
-        Route::get('all-course','CourseController@getAllCourses')->middleware('auth:api');
-        Route::post('/save-course','CourseController@savedCourse')->middleware('auth:api');
-        Route::get('student-profile','StudentController@studentProfile');
-
+        Route::group(
+        [
+            'middleware'=>'auth:api'
+        ],function(){
+            Route::get('all-course','CourseController@getAllCourses');
+            Route::post('/save-course','CourseController@savedCourse');
+            Route::get('/delete-course','CourseController@deleteCourse');
+            Route::get('student-profile','StudentController@studentProfile');
+        });
+      
     });
 
 
