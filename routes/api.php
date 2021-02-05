@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,9 +37,12 @@ Route::group(
             Route::post('/save-course','CourseController@savedCourse');
             Route::get('/delete-course','CourseController@deleteCourse');
             Route::get('student-profile','StudentController@studentProfile');
+            Route::get('activate/user','StudentController@activateUser');
+            Route::get('myOrders','OrderController@myOrder');
+            Route::post('orderStore','OrderController@orderStore');
         });
       
-    });
+    }); 
 
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

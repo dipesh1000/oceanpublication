@@ -31,8 +31,10 @@
                                     @include('frontend.cart.mini-cart')
                                 </li>
                                 @if ($user = Sentinel::check())
+       
                                 <li class="p-1 ml-4">
-                                    <a href="{{ route('userDashboard') }}"><i class="fa fa-user-circle"></i>{{ $user->first_name }}</a>
+                                    <a href="{{ route('userDashboard') }}"><i class="fa fa-user-circle"></i>
+                                        {{ $user->first_name }}</a>
                                 </li>
                                 @endif
 							</ul>
@@ -73,7 +75,10 @@
                                 </li>
                                 <li>
                                     @if ($user = Sentinel::check())
-                                        <a href="">Logout</a>
+                                        <form action="{{route('logout')}}" method="post">
+                                            @csrf
+                                            <a href="" onclick="this.parentNode.submit(); return false;">Logout</a>
+                                        </form>
                                     @else
                                         <a href="" data-toggle="modal" data-target="#signin">
                                             Login
@@ -84,7 +89,9 @@
                                     <form action="{{ url('/search') }}" type="get" role="search">
                                         <input type="text" name="q" id="query" class="search-bar" placeholder="Search here">
                                     </form>
+
                                     {{-- <div id="book_list"></div> --}}
+
 									<a>
                                         <i id="search-icon" class="fas fa-search"></i>
                                     </a>

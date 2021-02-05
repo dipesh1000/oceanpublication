@@ -21,6 +21,7 @@
                 </div>
                 <div class="modal-body">
                     <form action="{{ route('post.login') }}" method="POST">
+                        @csrf
                         <div class="form-group">
                         <label for="">User Name</label>
                         <input type="text" name="email" class="form-control" placeholder="Username">

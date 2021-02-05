@@ -73,12 +73,11 @@ class LoginController extends Controller
 
         try {
             if ($user = Sentinel::authenticate($credentials)) {
+         
                 return redirect()->route('userDashboard');
 
             } else {
                 Session::flash('failed', __('Incorrect Email or Password'));
-
-
                 return redirect()->back();
             }
         } catch (ThrottlingException $ex) {
@@ -94,7 +93,16 @@ class LoginController extends Controller
     }
 
     public function logout(){
-        Sentinel::logout();
+        $logout = Sentinel::logout();
+   
+        if($logout)
+        {
+            Session::flash('success', __('Logout Successfully'));
+        }
+        else
+        {
+            Session::flash('failed', __('Failed Logout'));
+        }
         return redirect('/login');
     }
 

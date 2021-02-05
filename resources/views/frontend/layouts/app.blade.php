@@ -13,6 +13,11 @@
 </head>
 
 <body>
+    @if(Session::has('failed'))
+        <div class="alert alert-danger" role="alert"> 
+            <p>{{Session::get('failed')}}</p>
+        </div>
+    @endif
     <!-- navigation here -->
     @if(Request::is('/'))
         @include('frontend.partials.nav')
@@ -27,6 +32,11 @@
 
     {{-- for custom scripts --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous"></script>
+    <script>
+        $(".alert-danger").fadeTo(2000, 500).slideUp(500, function(){
+            $(".alert-danger").slideUp(500);
+        });
+    </script>
     @stack('scripts')  
 </body>
 </html>

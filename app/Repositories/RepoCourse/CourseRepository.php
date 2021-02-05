@@ -11,6 +11,7 @@ class CourseRepository implements CourseInterface
     public function getBookById($id)
     {
         $book = Book::where('id', $id)->first();
+     
         $book->type = 'book';
         return $book;
     }

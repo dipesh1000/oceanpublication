@@ -62,9 +62,16 @@
                         </a>
                         </li>
                         <li>
+                            @if ($user = Sentinel::check())
+                            <form action="{{route('logout')}}" method="post">
+                                @csrf
+                                <a href="" onclick="this.parentNode.submit(); return false;">Logout</a>
+                            </form>
+                        @else
                             <a href="" data-toggle="modal" data-target="#signin">
                                 Login
                             </a>
+                        @endif
                         </li>
                         <li>
                            @include('frontend.cart.mini-cart')

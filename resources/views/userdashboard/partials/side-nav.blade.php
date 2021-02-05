@@ -13,37 +13,37 @@
         </div>
         <div class="d_navigation">
             <ul>
-                <li class="active">
+                <li @if(Request::is('userdashboard')) class="active" @endif>
                 <a href="{{ route('userDashboard') }}">
                         <i class="far fa-user"></i> Dashboard
                     </a>
                 </li>
-                <li>
+                <li @if(Request::is('profile')) class="active" @endif>
                 <a href="{{ route('userProfile') }}">
                         <i class="far fa-user"></i> My Profile
                     </a>
                 </li>
-                <li>
+                <li @if(Request::is('save-course-later')) class="active" @endif>
                     <a href="{{ route('saveCourseLater') }}">
                         <i class="far fa-user"></i> Saved Courses
                     </a>
                 </li>
-                <li>
+                <li @if(Request::is('courses')) class="active" @endif>
                     <a href="{{ route('purchasedCourse') }}">
                         <i class="far fa-user"></i> All Courses
                     </a>
                 </li>
-                <li>
+                <li @if(Request::is('')) class="active" @endif>
                     <a href="">
                         <i class="far fa-user"></i> My Order
                     </a>
                 </li>
-                <li>
+                <li @if(Request::is('')) class="active" @endif>
                     <a href="">
                         <i class="far fa-user"></i> Setting
                     </a>
                 </li>
-                <li>
+                <li @if(Request::is('')) class="active" @endif>
                     <a href="">
                         <i class="far fa-user"></i> Reviews
                     </a>
