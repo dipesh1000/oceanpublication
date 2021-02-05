@@ -37,6 +37,8 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
+        $role = Sentinel::findRoleByName('student');
+        $user->attach($role);
       
         $token = JWTAuth::fromUser($user);
          
@@ -46,11 +48,12 @@ class AuthController extends Controller
     }
     public function login(Request $request)
         {
-          
+            
             $credentials = $request->only('email', 'password');
        
+          
             try {
-                if (!$user = Auth::attempt($credentials)) 
+                if (!$user = Sentinel::forceAuthenticate($credentials)) 
                 {
                     return response()->json(['error' => 'invalid_credentials'], 400);
                 }
@@ -65,11 +68,12 @@ class AuthController extends Controller
                 return response()->json(['error' => $e->getMessage()], 403);
             }
            
-            //$token = JWTAuth::fromUser($user);
+            $token = JWTAuth::fromUser($user);
+         
             $token = [
-                'access_token' => $user,
+                'access_token' => $token,
                 'token_type' => 'bearer',
-                'user' => auth()->user()
+                'user' => $user
             ];
 
             return response()->json(compact('token'));

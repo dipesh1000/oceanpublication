@@ -17,13 +17,19 @@ class StudentController extends Controller
     public function studentProfile(Request $request)
     {
         
-        $user = Auth::user();
-        if($role = $user->roles)
+        $user = User::find(Auth::id());
+        if($user->roles->isNotEmpty())
         {
-            if($role[0]['name']=="student")
+          
+            if($user->roles[0]['name']=="student")
             {
                 return $this->success("User Retrieved",$user,) ;
             }
+        }
+        else
+        {
+         
+            return $this->error("User is not student");
         }
        
         
