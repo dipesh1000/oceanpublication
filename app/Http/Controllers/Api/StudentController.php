@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\UserRequestUpdate;
 use App\User;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
@@ -49,6 +50,31 @@ class StudentController extends Controller
        
         return response()->json(['message'=>'User Already Activated','user'=>$user->activations()->get()]);
 
+    }
+
+    public function studentProfileUpdate(Request $request)
+    {
+        $id = Auth::id();
+        $user = Sentinel::findById($id);
+        if($user->roles->isNotEmpty())
+        {
+          
+            if($user->roles[0]['name']=="student")
+            {
+                $updated_user = $user->update([
+                    "first_name" => $request->first_name ?? $user->first_name,
+                    "last_name"=> $request->last_name ?? $user->last_name,
+                    "role" =>  $user->role,
+                    "email" => $request->email ?? $user->email
+                ]);
+                return $this->success("User Updated",$user) ;
+            }
+        }
+        else
+        {
+         
+            return $this->error("User is not student");
+        }
     }
 
  

@@ -33,8 +33,8 @@
                         <i class="far fa-user"></i> All Courses
                     </a>
                 </li>
-                <li @if(Request::is('')) class="active" @endif>
-                    <a href="">
+                <li @if(Request::is('my-orders')) class="active" @endif>
+                    <a href="{{route('myOrders')}}">
                         <i class="far fa-user"></i> My Order
                     </a>
                 </li>

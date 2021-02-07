@@ -37,6 +37,7 @@ Route::group(
             Route::post('/save-course','CourseController@savedCourse');
             Route::get('/delete-course','CourseController@deleteCourse');
             Route::get('student-profile','StudentController@studentProfile');
+            Route::put('student-profile/update','StudentController@studentProfileUpdate');
             Route::get('activate/user','StudentController@activateUser');
             Route::get('myOrders','OrderController@myOrder');
             Route::post('orderStore','OrderController@orderStore');

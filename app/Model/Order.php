@@ -13,8 +13,12 @@ class Order extends Model
         'order_date',
         'price',
     ];
+    
     public function orderItem()
     {
-        return $this->morphTo();
+        return $this->morphTo(__FUNCTION__, 'purchaseble_type', 'purchaseble_id');
     }
+
+
+  
 }

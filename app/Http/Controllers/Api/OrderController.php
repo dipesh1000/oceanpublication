@@ -45,7 +45,7 @@ class OrderController extends Controller
             $masterOrder->invoice_no = $user->id.time();
             $masterOrder->status = MasterOrder::STATUS_ACTIVE;
             $masterOrder->grandTotal = $totalPrice;
-            $masterOrder->payment_method = 'Esewa';
+            $masterOrder->payment_method = 'Offline';
             $masterOrder->save();
         } catch (\Throwable $e) {
             DB::rollback();

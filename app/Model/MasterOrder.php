@@ -41,4 +41,8 @@ class MasterOrder extends Model
             ? $list[$this->status]
             : $this->status;
     }
+    public function order()
+    {
+        return $this->hasMany(Order::class,'master_order_id','id');
+    }
 }

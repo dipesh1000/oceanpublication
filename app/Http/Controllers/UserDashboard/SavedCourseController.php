@@ -20,6 +20,7 @@ class SavedCourseController extends Controller
     }
     public function savedCourse(Request $request)
     { 
+
         if (Sentinel::check()) {
             $user = Sentinel::getUser();
             $courseId = $request->courseId;
@@ -57,16 +58,18 @@ class SavedCourseController extends Controller
     }
     public function getSavedCourse()
     {
-
+        
         $user = Sentinel::getUser();
         $savedCourse = SavedCourse::where('user_id', $user->id)->get();
         $courses = [];
         if (count($savedCourse) > 0) 
         {
             foreach ($savedCourse as $courseItem){
+              
                 $ss = $courseItem->saveable_type;
                 if($ss == 'App\Model\Book'){
                     $courses[] = $this->course->getBookById($courseItem->saveable_id);
+                   
                 }
                 if($ss == 'App\Model\Video'){
                     // dd($courseItem->saveable_id);

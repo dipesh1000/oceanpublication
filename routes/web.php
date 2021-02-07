@@ -74,6 +74,7 @@ Route::group([
 ],function() {
     Route::get('/userdashboard', 'DashboardController@index')->name('userDashboard');
     Route::get('/profile', 'ProfileController@userProfile')->name('userProfile');
+    Route::get('my-orders','DashboardController@myOrders')->name('myOrders');
     Route::get('/profile/edit/{id}', 'ProfileController@userProfileEdit')->name('userProfileEdit');
     Route::patch('/profile/edit/{id}', 'ProfileController@updateProfile')->name('updateProfile');
     Route::get('/checkout', 'OrderController@getCheckout')->name('checkout.page');
