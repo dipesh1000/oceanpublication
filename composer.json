@@ -26,7 +26,8 @@
         "spatie/laravel-activitylog": "^3.16",
         "spatie/laravel-analytics": "^3.10",
         "tymon/jwt-auth": "^1.0",
-        "uxweb/sweet-alert": "^2.0"
+        "uxweb/sweet-alert": "^2.0",
+        "yoeunes/toastr": "^1.2"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

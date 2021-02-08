@@ -29,6 +29,8 @@ Route::group(
         
         Route::get('/packages', 'PackageController@index');
         Route::get('/package/{slug}', 'PackageController@getPackageBySlug');
+        Route::get('categories','CategoryController@index');
+        Route::get('/categories/{slug}','CategoryController@getCategory');
         Route::group(
         [
             'middleware'=>'auth:api'

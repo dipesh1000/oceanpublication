@@ -9,14 +9,15 @@
     <!-- style src here -->
     @include('frontend.partials.style')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
-
+    @toastr_css
 </head>
 
 <body>
     @if(Session::has('failed'))
-        <div class="alert alert-danger" role="alert"> 
+        {{-- <div class="alert alert-danger" role="alert"> 
             <p>{{Session::get('failed')}}</p>
-        </div>
+        </div> --}}
+        
     @endif
     <!-- navigation here -->
     @if(Request::is('/'))
@@ -37,6 +38,12 @@
             $(".alert-danger").slideUp(500);
         });
     </script>
+   
+     @jquery
+     @toastr_js
+     @toastr_render
+     
     @stack('scripts')  
+    
 </body>
 </html>

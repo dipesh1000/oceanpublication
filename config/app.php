@@ -180,6 +180,7 @@ return [
         App\Providers\RepositoryServiceProvider::class,
         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
         'Intervention\Image\ImageServiceProvider',
+        Yoeunes\Toastr\ToastrServiceProvider::class,
 
 
     ],

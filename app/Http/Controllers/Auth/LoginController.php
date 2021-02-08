@@ -24,7 +24,7 @@ class LoginController extends Controller
     }
 
     public function adminLoginPost(Request $request){
-
+        
         $request->validate([
             'email'    => 'required|email',
             'password' => 'min:8|required'
@@ -60,7 +60,7 @@ class LoginController extends Controller
     }
 
     public function postLogin(Request $request)
-    {    
+    {   
         $request->validate([
             'email'    => 'required|email',
             'password' => 'min:6|required'
@@ -77,12 +77,15 @@ class LoginController extends Controller
                 return redirect()->route('userDashboard');
 
             } else {
-                Session::flash('failed', __('Incorrect Email or Password'));
+
+                toastr()->error('Incorrect Email or Password');
+
+               Session::flash('failed', __('Incorrect Email or Password'));
                 return redirect()->back();
             }
         } catch (ThrottlingException $ex) {
             Session::flash('failed', __('Too many Attempts!!'));
-
+            toastr()->error('Too many Attempts!!');
             return redirect()->back();
 
         } catch (NotActivatedException $ex) {
@@ -97,11 +100,13 @@ class LoginController extends Controller
    
         if($logout)
         {
-            Session::flash('success', __('Logout Successfully'));
+            toastr()->success('Logout Successfully');
+            //Session::flash('success', __('Logout Successfully'));
         }
         else
         {
-            Session::flash('failed', __('Failed Logout'));
+            toastr()->error('Failed Logout');
+           // Session::flash('failed', __('Failed Logout'));
         }
         return redirect('/login');
     }

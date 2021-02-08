@@ -118,7 +118,7 @@
     <script src="{{ asset('assets/js/app.js') }}" defer></script>
     {{-- <script src="{{ asset('assets/toastr/toastr.min.js') }}" defer></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/js/toastr.min.js"></script>
-    {!! Toastr::message() !!}
+    {{-- {!! Toastr::message() !!} --}}
 
 
     <script>
