@@ -38,7 +38,7 @@
                                         <div class="col-lg-3 col-md-6 col-sm-6">
                                             <div class="course-element">
                                                 <div class="course-element-image">
-                                              
+                                                    
                                                 <img src="{{ $value->orderItem->image }}" />
                                                 </div>
                                                 <div class="course-element-details">

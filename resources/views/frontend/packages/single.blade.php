@@ -231,9 +231,10 @@
             }).catch(swal.noop);
         }
         $(document).on("click", ".addtocart", function (e) {
-            // alert('here');
             e.preventDefault();
+           
             var $this = $(this);
+            console.log($this);
             var course = $this.attr('data-course');
             var type = 'package';
             quantity = 1;
@@ -276,6 +277,7 @@
                 },
                 complete: function () {
                     $this.button('reset');
+                    
                     //$("html, body").animate({scrollTop: 0}, "slow");
                 }
             });

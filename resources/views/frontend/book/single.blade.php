@@ -287,9 +287,10 @@
             }).catch(swal.noop);
         }
         $(document).on("click", ".addtocart", function (e) {
-            // alert('here');
+        
             e.preventDefault();
             var $this = $(this);
+           
             var course = $this.attr('data-course');
             var type = 'book';
             quantity = 1;
@@ -331,6 +332,7 @@
                 },
                 complete: function () {
                     $this.button('reset');
+                 
                     //$("html, body").animate({scrollTop: 0}, "slow");
                 }
             });

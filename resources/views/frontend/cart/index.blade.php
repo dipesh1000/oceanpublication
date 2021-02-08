@@ -125,7 +125,15 @@
                     window.location.replace('{{ route('login') }}');
                   }
                   if (data.status) {
-                    swal(data.status, data.message, "success");
+                    //swal(data.status, data.message, "success");
+                    swal({
+                    title: data.status,
+                    text:  data.message,
+                    type: 'success'
+                  }).then(function() {
+                      window.location.href = "/";
+                  })
+                    
                   }
                 },
                 error: function (xhr, ajaxOptions, thrownError) {

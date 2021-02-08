@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\UserDashboard;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Billing;
 use App\Model\MasterOrder;
 use App\Model\Order;
 use App\Repositories\RepoCourse\CourseRepository;
@@ -11,6 +12,7 @@ use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -75,6 +77,7 @@ class OrderController extends Controller
             $masterOrder->grandTotal = $totalPrice;
             $masterOrder->payment_method = 'Esewa';
             $masterOrder->save();
+         
         } catch (\Throwable $e) {
             // DB::rollback();
             return redirect()->back()->with('errors', 'Error While Checkout');
@@ -91,21 +94,27 @@ class OrderController extends Controller
                     $checkout = $order->save();
                     $courses[] = $order; 
                         if($checkout == true){
+                            
                             Cart::destroy($cart->rowId);
                         }
-                        return response()->json( [
-                                'status'  => 'success',
-                                'message' => 'Course Checkout Successfully.'
-                            ], 200 );
+                   
                     }  
+                   // Mail::to($user->email)->send(new Billing($masterOrder));
+                    return response()->json( [
+                        'status'  => 'success',
+                        'message' => 'Course Checkout Successfully.'
+                    ], 200 );
+                 
                     // DB::commit();
                     return view('UserDashboard.order.checkout', compact('courses', 'masterOrder'));
                     }catch (\Throwable $e) {
                         // DB::rollback();
                         return redirect()->back()->with('errors', 'Error While Checkout');
-                    }
+                }
                    
         }
+      
+    
         
     }
 }

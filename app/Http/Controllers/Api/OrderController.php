@@ -64,9 +64,7 @@ class OrderController extends Controller
                     $order->price = $this->courseRepo->getClass($cart['name'])::first()->offer_price;
                     $checkout = $order->save();
                     $courses[] = $order; 
-                        if($checkout == true){
-                            // Cart::destroy($cart->rowId);
-                        }
+                       
                         return response()->json( [
                                 'status'  => 'success',
                                 'message' => 'Course Checkout Successfully.'
