@@ -25,6 +25,7 @@ class LoginController extends Controller
 
     public function adminLoginPost(Request $request){
         
+    
         $request->validate([
             'email'    => 'required|email',
             'password' => 'min:8|required'
@@ -35,9 +36,9 @@ class LoginController extends Controller
             'password' => $request->password,
         );
 
-
+        
         try {
-            if ($user = Sentinel::authenticate($credentials)) {
+            if ($user = Sentinel::forceAuthenticate($credentials)) {
 
                 return redirect()->route('admin.dashboard');
 
